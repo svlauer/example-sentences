@@ -94,8 +94,7 @@ Nesting works, of course, up to three levels deep:
 \begin{examples}
     \item \begin{examples}
                \item An example with sub-examples.
-               \item 
-                     \begin{examples}
+               \item \begin{examples}
                        \item And sub-sub examples, like this one.
                        \item And a second one.
                      \end{examples}
@@ -107,3 +106,76 @@ which will render as:
 
 ![Sub- and sub-sub examples](http://www.sven-lauer.net/files/examples/sub-examples.png)
 
+And, as usual, you can give an optional argument to `\item` to manually specify
+the label (e.g., if you are quoting an example, and want to use the original
+example number):
+
+```latex
+\begin{examples}
+    \item[(23)] This example will be numbered (23).
+\end{examples}
+```
+
+In fact, this is almost all you need to know in order to produce anything that
+`example_sentences` can produce. The only additional thing to know is how to
+typeset diacritic marks indicating acceptability and such. You can do this 
+explicitly by using the `\diacritic{}` command:
+```latex
+\begin{examples}
+    \item \diacritic{*} Bad sentence this sounds.
+\end{examples}
+```
+Diacritics are typeset in the space between example number and example. So the
+above will render as:
+
+![Example with diacritic](http://www.sven-lauer.net/files/examples/diacritic-examples.png)
+
+However, explicit use of the `\diacritic{}` command is discouraged. Instead,
+you should use (if possible) the convenience macros described below.
+
+### Syntactic sugar: Enhancements
+
+If you have `xparse.sty` available, which is contained in 
+[l3packages](https://www.ctan.org/pkg/l3packages)), a number of enhancements
+of the basic `\item` command are available.
+
+#### Assigning labels with `\item()`
+
+The basic `\label{}` command works as it always does. However, a more convenient
+way to assign labels to examples is provided. Simply supply the desired `label`
+in parentheses after `\item`:
+```latex
+\begin{examples}
+    \item(harlem) If you want to go to Harlem, you have to take the A train.
+\end{examples}
+```
+This is equivalent to:
+```latex
+\begin{examples}
+    \item\label{harlem} If you want to go to Harlem, you have to take the A train.
+\end{examples}
+```
+
+#### Cross-references with `\item{}`
+
+Sometimes it is convenient to give one example the same number as a previous
+one (for example, if the second example is a repetition of earlier one). I've
+never missed this functionality with `linguex.sty`, but some people seem to 
+like it. With `example_sentences`, you can do this by providing the `label`
+of the previous example in curly braces.
+
+So, a couple of pages after the previous example, you could use:
+```latex
+\begin{examples}
+    \item{harlem} If you want to go to Harlem, you have to take the A train.
+\end{examples}
+```
+And the result would be a repetition of the previous example number. In fact,
+this is essentially an alias for the following:
+\begin{examples}
+    \item[(\ref{harlem})] If you want to go to Harlem, you have to take the A train.
+\end{examples}
+```
+Consequently, subexample-references will work as expected (though for more on
+`\ref`erences, and the need for parentheses in the expansion given here, see
+below).
