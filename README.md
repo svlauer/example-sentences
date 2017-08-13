@@ -136,7 +136,7 @@ you should use (if possible) the convenience macros described below.
 ### Syntactic sugar: Enhancements
 
 If you have `xparse.sty` available, which is contained in 
-[l3packages](https://www.ctan.org/pkg/l3packages)), a number of enhancements
+[l3packages](https://www.ctan.org/pkg/l3packages), a number of enhancements
 of the basic `\item` command are available.
 
 #### Assigning labels with `\item()`
@@ -172,6 +172,7 @@ So, a couple of pages after the previous example, you could use:
 ```
 And the result would be a repetition of the previous example number. In fact,
 this is essentially an alias for the following:
+```
 \begin{examples}
     \item[(\ref{harlem})] If you want to go to Harlem, you have to take the A train.
 \end{examples}
