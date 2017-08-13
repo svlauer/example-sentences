@@ -192,25 +192,39 @@ So, a couple of pages after the previous example, you could use:
 \end{examples}
 ```
 And the result would be a repetition of the previous example number. In fact,
-this is essentially an alias for the following:
-```latex
-\begin{examples}
-    \item[(\ref{harlem})] If you want to go to Harlem, you have to take the A train.
-\end{examples}
-```
-Subexample-references will work as expected.
+`\item{harlm}` is just a synonym for `\item[(\ref{harlem})]`. Consequently,
+sub-example-references will work as expected.
 
-**Note:** I recommend thinking twice before you use this style. Often,
-it is better to number repeated examples consecutively, and indicate that the
-example is repeated in another fashion. This can be done either in the text
-("... example (1), repeated below as (21) ...") or with a construct like the 
-following:
-```latex
-\begin{examples}
-    \item If you want to got to Harlem, you have to take the A train.\hfill=(\ref{harlem})
-\end{examples}
-```
-which will render as:
+**Note:** As a reader, I find this style confusing. Often, it is better to number 
+repeated examples consecutively, and indicate that the
+example is repeated in another fashion. 
 
-![Repeated example](http://www.sven-lauer.net/files/examples/repeated-example.png)
+### References to examples
+
+The standard `\ref{}` command words for examples. However, it produces the
+(sub)example number without enclosing parentheses. This means that it would
+have to be used in running text with explicit parentheses: 
+```latex
+(\ref{harlem}) is curious in that ...
+```
+rather than
+```latex
+\ref{harlem} is curious in that ...
+```
+This is by design, because it is sometimes necessary to access the example 
+identifier itself. An example is if one wants to reference a range of 
+sub-examples, as in:
+```latex
+(\ref{imperative}a-f) show the varied uses of imperatives.
+```
+However, the package provides a handy shortcut for example references. Instead of 
+writing `(\ref{harlem})`, you can simply write:
+```latex
+\ex{harlem} is curious in that ...
+```
+And, as an added nicety, you can provide arbitrary material that is appended to
+the example label as an optional argument:
+```latex
+\ex{imperative}[a-f] show the varied uses of imperatives.
+```
 
