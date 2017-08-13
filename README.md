@@ -144,9 +144,11 @@ of the basic `\item` command are available.
 All variants of `\item` (including the ones described below) allow for an 
 optional argument in angle brackets containing a diacritic/acceptability mark:
 
+```latex
 \begin{examples}
     \item<*> Bad sentence this sounds.
 \end{examples}
+```
 
 Renders as
 
