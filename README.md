@@ -193,7 +193,7 @@ So, a couple of pages after the previous example, you could use:
 ```
 And the result would be a repetition of the previous example number. In fact,
 this is essentially an alias for the following:
-```
+```latex
 \begin{examples}
     \item[(\ref{harlem})] If you want to go to Harlem, you have to take the A train.
 \end{examples}
@@ -203,7 +203,7 @@ Subexample-references will work as expected.
 **Note:** I recommend thinking twice before you use this style. Often,
 it is better to number repeated examples consecutively, and indicate that the
 example is repeated in another fashion. This can be done either in the text
-("... example (3), repeated below as (20) ...") or with a construct like the 
+("... example (1), repeated below as (21) ...") or with a construct like the 
 following:
 ```latex
 \begin{examples}
