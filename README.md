@@ -87,3 +87,23 @@ you use the `examples` environment instead of `enumerate`:
 This will produce:
 
 ![Two examples](http://www.sven-lauer.net/files/examples/two_examples.png)
+
+Nesting works, of course, up to three levels deep:
+
+```latex
+\begin{examples}
+    \item \begin{examples}
+               \item An example with sub-examples.
+               \item 
+                     \begin{examples}
+                       \item And sub-sub examples, like this one.
+                       \item And a second one.
+                     \end{examples}
+           \end{examples}
+\end{examples}
+```
+
+which will render as:
+
+![Sub- and sub-sub examples](http://www.sven-lauer.net/files/examples/sub-examples.png)
+
