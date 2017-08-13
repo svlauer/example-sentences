@@ -128,7 +128,7 @@ explicitly by using the `\diacritic{}` command:
 Diacritics are typeset in the space between example number and example. So the
 above will render as:
 
-![Example with diacritic](http://www.sven-lauer.net/files/examples/diacritic-examples.png)
+![Example with diacritic](http://www.sven-lauer.net/files/examples/diacritic-example.png)
 
 However, explicit use of the `\diacritic{}` command is discouraged. Instead,
 you should use (if possible) the convenience macros described below.
