@@ -8,7 +8,7 @@ their writing. There is a fairly accepted standard for format for presenting
 those: Example sentences are numbered continuously throughout a document, and
 optionally can have subexamples, as in (2) below.
 
-![An example of an example](http://www.sven-lauer.net/files/examples/simple_example.png)
+![An example of an example](http://www.sven-lauer.net/files/examples/simple_example.png?new)
 
 The platonic ideal of a LaTeX package for typesetting such examples whould 
 define an environment that behaves as much as possible as LaTeX's
