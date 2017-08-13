@@ -19,8 +19,8 @@ lists). So the above examples would be typeset as:
 \begin{examples}
   \item This is an example.
   \item \begin{examples}
-          \item This is the first sub-example.
-          \item This is the second sub-example.
+          \item This a sub-example.
+          \item This is another sub-example.
         \end{examples}
 \end{examples}
 ```
@@ -55,3 +55,35 @@ so I decided to create my own.
   
 Both of these are available in CTAN and should be part of most 
 recent-ish TeX installations, as far as I know.
+
+## Installation
+
+As usual, simply place `example_sentences.sty` some place where TeX can find it
+(the directory where your tex files live will work if all else fails).
+
+## Usage
+
+Load in the usual way, by placing the following in the preamble of your
+document:
+```latex
+\usepackage{example_sentences}
+```
+
+There are some package options, which will be described later.
+
+### Zero learning curve
+
+If you know how to use the `enumerate` environment LaTeX provides, you already
+know how to use `example_sentences`. All that changes for basic usage is that
+you use the `examples` environment instead of `enumerate`:
+
+```latex
+\begin{examples}
+    \item This is the first example.
+    \item This is second example.
+\end{examples}
+```
+
+This will produce:
+
+![Two examples](http://www.sven-lauer.net/files/examples/two_examples.png)
