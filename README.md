@@ -6,12 +6,9 @@ A LaTeX package for (better) linguistic examples
 Linguists (and scholars in related fields) use a lot of example sentences in
 their writing. There is a fairly accepted standard for format for presenting 
 those: Example sentences are numbered continuously throughout a document, and
-optionally can have subexamples, as in (2).
+optionally can have subexamples, as in (2) below.
 
-(1) This is an example.
-
-(2) a. This is the first sub-example.
-    b. This is the second sub-example.
+![An example of an example](http://www.sven-lauer.net/files/examples/simple_example.png)
 
 There exist a number of (La)Tex packages for typesetting such examples, but
 each has a number of drawbacks: 
@@ -39,16 +36,20 @@ lists). So the above examples would be typeset as:
 \end{examples}
 ```
 
-There is an old style file called `example.sty` floating around that provides
+There is an old style file called `examples.sty` (written by Alexander Holt at 
+the University of Edinburgh) floating around that provides
 something like that, but it has various features I didn't like. So I made my
 own.
 
 ## Dependencies
 
-- `example_sentences` depends only on the 
-  [enumitem]{https://www.ctan.org/pkg/enumitem} package.[^ In fact, the main
-  part of `example_sentences` is just a paper-thin wrapper around `enumitem`.]
-- The `xparse` package (available in 
+- [enumitem](https://www.ctan.org/pkg/enumitem) is the only required dependency.
+  (In fact, the main part of `example_sentences` is just a paper-thin wrapper 
+  around `enumitem`'s functionality.]
+- The `xparse` package (available as part of
   [l3packages](https://www.ctan.org/pkg/l3packages)) is not required, but if
   it is present, it is used to provide some nice syntactic sugar for the `\item` 
   commands.
+  
+Both of these are available in CTAN and should be part of most 
+recent-ish TeX installations, as far as I know.
