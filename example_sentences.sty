@@ -1,0 +1,186 @@
+\NeedsTeXFormat{LaTeX2e}
+%
+\ProvidesPackage{example_sentences}[2017/08/12]
+%
+% Package Option: normalitem
+% Use \usepackage[normalitem]{example_sentences} to leave the original \item
+% command unchanged. You can then use \exitem instead for advanced behavior
+% that item otherwise gets, or the short version \ex (see below).
+\newif\if@changeitem\@changeitemtrue
+\DeclareOption{normalitem}{\@changeitemfalse}
+%
+% Package Option: shortform
+% Use \usepackage[shortform]{example_sentences} defines short names for the
+% environment "exe" and the item command \ex for \(ex)item.  So the following
+% is valid:
+%    \begin{exe}
+%       \ex(weird)<?> This example is weird.
+%       \ex(not-weird) This is example is not as weird as \ref{weird}.
+%    \end{exe}
+% Short forms are simply additional synonyms, so they can be freely intermixed
+% with the long form commands.
+\newif\if@shortform\@shortformfalse
+\DeclareOption{shortform}{\@shortformtrue}
+%
+% Package Option: enumitemize
+% Standardly, example_sentences does not apply enumitem's enhancements to 
+% the standard lists. This option changes that.
+\newif\if@keep@latex@lists\@keep@latex@liststrue%
+\DeclareOption{enumitemize}{\@keep@latex@listsfalse}%
+%
+% All remaining options are passed on to the enumitem package. Note that this
+% you can pass [loadonly] to example_sentences to ensure that the usual environments
+% (itemize, enumerate and description) are not enhanced by enumitem (the
+% default).
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{enumitem}}
+%
+\ProcessOptions\relax
+%
+%
+\if@keep@latex@lists
+    \PassOptionsToPackage{loadonly}{enumitem}
+\fi
+%  
+% example_sentences is actually just a thin wrapper around the enumitem package
+\RequirePackage{enumitem}
+%
+% Define example lists as a clone fo enumerate. 
+\newlist{examples}{enumerate}{3}
+%
+% We define the defauls as keys, to make it easier to change specific settings.
+%
+% Defaults for all lists (overwritten by more spefic features set below)
+\SetEnumitemKey{exdefaults}{%
+    align=left,%
+    parsep=0pt,%
+    topsep=0pt,%
+    partopsep=0pt,%
+}
+\setlist[examples]{exdefaults}
+%
+% Set properties for first level
+\SetEnumitemKey{ex1defaults}{
+  label={(\arabic*)},%
+  ref={\arabic{examplesi}},
+  % Horizontal Spacing -- defaults should play well with label up to four
+  % digits long, plus parens
+  labelindent=0pt,%
+  leftmargin=2\parindent,%
+  labelsep=*,%
+  itemindent=0pt,%
+  labelwidth=*,%
+  % vertical spacing
+  itemsep=0.5\baselineskip,%
+  topsep=0.75\baselineskip,
+  before=\beforeexamplelist,
+  after=\afterexamplelist,%
+  resume=examples,%
+}
+\setlist[examples,1]{ex1defaults}
+\SetEnumitemKey{ex2defaults}{%
+  label={\alph*.},%
+  ref={\arabic{examplesi}\alph{examplesii}},%
+  % Horizontal spacing
+  labelindent=0pt,%
+  leftmargin=1.25\parindent,%
+  labelsep=*,%
+  itemindent=0pt,%
+  labelwidth=*,%
+  % Vertical spacing
+  topsep=0.25\baselineskip%
+}
+\setlist[examples,2]{ex2defaults}
+%
+% Defaults for 3rd level
+\SetEnumitemKey{ex3defaults}{%
+  label={(\roman*)},%
+  ref={\arabic{examplesi}\alph{examplesii}\roman{examplesiii}},%
+  labelindent=0pt,%
+  leftmargin=1\parindent,%
+  labelsep=*,%
+  itemindent=0pt,%
+  labelwidth=*,%
+  % Vertical spacing
+  topsep=0.25\baselineskip%
+}
+\setlist[examples,3]{ex3defaults}
+% A style for lists footnotes --- note that this is NOT automatically
+% loaded. To get the style, you have to explicitly do \begin{examples}[footnote]
+% or \begin{exe}[footnote].
+\SetEnumitemKey{footnote}{%
+    label={(\roman*)},%
+    ref={(\roman{examplesi})},%
+    resume=footnoteex,
+    start=1,
+}
+\newcommand{\exref}[2][]{(\ref{#2}#1)}
+\let\ex\exref
+% Enable short form synonyms
+\if@shortform
+    \let\exe\examples
+    \let\endexe\endexamples
+    % At this point, we let \ex be \item, in case xparse is present, we 
+    % replace it later with \exitem.
+    \let\ex\item
+\fi
+% \diacritic{}: Sets a grammaticallity/acceptability judgment in the space
+% between example number and sentence. This command is used internally in
+% the \(ex)item commands, but maybe useful for the user in environments where
+% xparse is not available.
+% The definition of this command is borrowed from Alexander Holt's example.sty
+\newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.15 em}\ignorespaces}
+%
+% A flexible item command for examples. Can be used in the following ways
+%  - \exitem Standard use without argument.
+%  - \exitem[(4)] Optional argument in square brackets supplies a manual number (or other item).
+%  - \exitem(foo) Optional argument in round brackets is a convenient way to assign labels. Equivalent to \exitem\label{foo}
+%  - \exitem{foo} Optional argument in curly braces is an easy way to do crossreferences (e.g. for repeated examples). Equivalent to \exitem[\ref{foo}].
+%  All the above versions allow an optional argument in angle brackets, for acceptability judgements which are typeset in the space between example number/letter and example text:
+%  - \exitem<*> \exitem[(4)]<**> \exitem(foo)<\#> \exitem{foo}<??\%> all work as expected.
+\newif\if@xparse\@xparsefalse
+\IfFileExists{xparse.sty}{%
+    \@xparsetrue%
+}{%
+    \@xparsefalse%
+}%
+\newcommand{\beforeexamplelist}{}
+\newcommand{\afterexamplelist}{}
+\if@xparse
+    \RequirePackage{xparse}
+    \let\latexitem\item
+    \NewDocumentCommand{\exitem}{o d() g d<>}{%
+        \IfValueTF{#1}{%
+            \latexitem[#1]%
+        }{%
+            \IfValueTF{#2}{%
+                \latexitem \label{#2}%
+            }{%
+                \IfValueTF{#3}{%
+                    \latexitem[\exref{#3}]%
+                }{
+                    \latexitem%
+                }
+            }%
+        }%
+        \IfValueT{#4}{%
+            \diacritic{#4}
+        }%
+    }
+    \let\oldexref\exref
+    \RenewDocumentCommand{\exref}{o m o}{%
+        \IfValueTF{#1}{\oldexref[#1]{#2}}{%
+          \IfValueTF{#3}{\oldexref[#3]{#2}}{\oldexref{#2}}%
+        }%
+    }
+    \let\ex\exref
+    \if@changeitem
+        \g@addto@macro\beforeexamplelist{\let\item\exitem}
+        \g@addto@macro\afterexamplelist{\let\item\latexitem}
+    \fi
+    \if@shortform
+        \g@addto@macro\beforeexamplelist{\let\ex\exitem}
+        \g@addto@macro\afterexamplelist{\let\ex\exref}    
+    \fi
+\fi
+
+   
