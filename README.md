@@ -139,6 +139,25 @@ If you have `xparse.sty` available, which is contained in
 [l3packages](https://www.ctan.org/pkg/l3packages), a number of enhancements
 of the basic `\item` command are available.
 
+#### Diacritics with `\item<>`
+
+All variants of `\item` (including the ones described below) allow for an 
+optional argument in angle brackets containing a diacritic/acceptability mark:
+
+\begin{examples}
+    \item<*> Bad sentence this sounds.
+\end{examples}
+
+Renders as
+
+![Example with diacritic](http://www.sven-lauer.net/files/examples/diacritic-example.png)
+
+If available, this style is preferred over the explicit use of `\diacritic{}`.
+
+**Note:** Writing this documentation, it occurs to me that this style will
+likely wreak havoc when `example_sentences` is used with the `beamer` package
+to produce slide shows. So there is a chance this will change in the future.
+
 #### Assigning labels with `\item()`
 
 The basic `\label{}` command works as it always does. However, a more convenient
@@ -177,6 +196,19 @@ this is essentially an alias for the following:
     \item[(\ref{harlem})] If you want to go to Harlem, you have to take the A train.
 \end{examples}
 ```
-Consequently, subexample-references will work as expected (though for more on
-`\ref`erences, and the need for parentheses in the expansion given here, see
-below).
+Subexample-references will work as expected.
+
+**Note:** I recommend thinking twice before you use this style. Often,
+it is better to number repeated examples consecutively, and indicate that the
+example is repeated in another fashion. This can be done either in the text
+("... example (3), repeated below as (20) ...") or with a construct like the 
+following:
+```latex
+\begin{examples}
+    \item If you want to got to Harlem, you have to take the A train.\hfill=(\ref{harlem})
+\end{examples}
+```
+which will render as:
+
+![Repeated example](http://www.sven-lauer.net/files/examples/repeated-example.png)
+
