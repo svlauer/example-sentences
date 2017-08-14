@@ -267,8 +267,8 @@ For details about the many configuration options, see [the documentation of
 
 ### Short form commands with `shortform`
 
-If you cannot live without typing `\ex` in example environment, you can load
-the package as `\usepackage[shortform][example_sentences]`. This enables the
+If you cannot live without typing `\ex` in example environments, you can load
+the package as `\usepackage[shortform]{example_sentences}`. This enables the
 short names `exe` (for the environment) and `\ex` (for the `\item` command).
 So the initial example can then be rewritten as:
 
