@@ -254,3 +254,32 @@ available), so all of `\ex<*>`, `\ex(label)<\#>`, `\ex{label}<?>` and
 For obvious reasons, the reference convenience command `\ex` will not be 
 available in within example environments in `shortform` mode (it continues
 to work outside of the environment). You can use its alias `\exref` instead.
+
+The commands introduced by `shortform` only are synonyms for the longer 
+commands, which remain in place. So long and short form commands can be mixed
+freely.
+
+### Compatibility mode with `normalitem`
+
+To provide the extended behavior for `\item` described above, LaTeX's own
+implementation of this command needs to be overwritten (this happens only
+in example lists, however). If you use any other packages that modify this
+command, there could be conflicts and other problems.
+
+For this reason, the option `normalitem` tells the package to not touch the
+`\item` command. In this case, the command `\exitem` can be used in place
+of `\item`, which has all of the advanced behavior of `\item` described above.
+
+### The `enumitemize` option
+
+Standardly, `example_sentences` loads the `enumitem` package with the `loadonly`
+option, which ensures that the standard LaTeX lists (`enumerate`,`itemize` and
+`description`) are not enhanced by `enumitem`.
+
+If you want to change this, pass the `enumitemize` option to 
+`example_sentences`.
+
+### Other options
+
+All options besides the one described above will be passed through to 
+`enumitem`.
