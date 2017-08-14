@@ -131,7 +131,7 @@ above will render as:
 However, explicit use of the `\diacritic{}` command is discouraged. Instead,
 you should use (if possible) the convenience macros described below.
 
-### Syntactic sugar: Some enhancements for `\item`
+## Syntactic sugar: Some enhancements for `\item`
 
 If you have `xparse.sty` available, which is contained in 
 [l3packages](https://www.ctan.org/pkg/l3packages), a number of enhancements
