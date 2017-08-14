@@ -319,3 +319,27 @@ If you want to change this, pass the `enumitemize` option to
 
 All options besides the one described above will be passed through to 
 `enumitem`.
+
+## Known issues
+
+### Footnotes
+
+It is custom to number examples in footnotes differently from the main text:
+Level one examples have lowercase roman numerals as labels, with counting 
+starting anew for each footnote.
+
+This is difficult to achieve in the general case. `example_sentences` patches
+the standard LaTeX footnote commands (i.e., `\footnote` and `footnotetext`),
+for all other methods of typesetting notes, you will have to ensure yourself
+that the command `\footnotizeexamples` is called at the beginning of each note
+(or before the first example) and `\unfootnotizeexamples` is called at the 
+end of each footnote (or after the last example).
+
+*Note on implementation*: The example environments used in footnotes is in fact
+entirely different from the main `examples` (it is just mostly configured in 
+the same way). If you want to modify the appearance of examples in footnotes,
+you'll need to use `\setlist[fnexamples]{}` / `\setlist[fnexamples,1]{}`, etc.
+Make sure that you do not use the `ex1defaults`/`ex2defaults`/`ex3defaults` 
+keywords in this case, as this will reuse the main counters. Instead, you can 
+use the `ex1spacingdefaults`/`ex2spacingdefaults`/`ex3spacingdefaults` to get
+the spacing defaults for the three levels only.

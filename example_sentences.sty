@@ -46,6 +46,10 @@
 %
 % Define example lists as a clone fo enumerate. 
 \newlist{examples}{enumerate}{3}
+% We define a separate list for use in footnotes, as this is the cleanest way
+%to handle those.
+\newlist{fnexamples}{enumerate}{3}
+
 %
 % We define the defauls as keys, to make it easier to change specific settings.
 %
@@ -57,11 +61,11 @@
     partopsep=0pt,%
 }
 \setlist[examples]{exdefaults}
+\setlist[fnexamples]{exdefaults}
+
 %
 % Set properties for first level
-\SetEnumitemKey{ex1defaults}{
-  label={(\arabic*)},%
-  ref={\arabic{examplesi}},
+\SetEnumitemKey{ex1spacingdefaults}{%
   % Horizontal Spacing -- defaults should play well with label up to four
   % digits long, plus parens
   labelindent=0pt,%
@@ -74,12 +78,22 @@
   topsep=0.75\baselineskip,
   before=\beforeexamplelist,
   after=\afterexamplelist,%
+}
+
+\SetEnumitemKey{ex1defaults}{
+  label={(\arabic*)},%
+  ref={\arabic{examplesi}},
+  ex1spacingdefaults,
   resume=examples,%
 }
 \setlist[examples,1]{ex1defaults}
-\SetEnumitemKey{ex2defaults}{%
-  label={\alph*.},%
-  ref={\arabic{examplesi}\alph{examplesii}},%
+\setlist[fnexamples,1]{
+  ex1spacingdefaults,%
+  label={(\roman*)},%
+  ref={(\roman{fnexamplesi})},%
+  resume,%
+}
+\SetEnumitemKey{ex2spacingdefaults}{%
   % Horizontal spacing
   labelindent=0pt,%
   leftmargin=1.25\parindent,%
@@ -88,13 +102,21 @@
   labelwidth=*,%
   % Vertical spacing
   topsep=0.25\baselineskip%
+
+}
+\SetEnumitemKey{ex2defaults}{%
+  label={\alph*.},%
+  ref={\arabic{examplesi}\alph{examplesii}},%
+  ex2spacingdefaults,
 }
 \setlist[examples,2]{ex2defaults}
+\setlist[fnexamples,2]{ex2spacingdefaults,%
+  label={\alph*.},%
+  ref={\roman{fnexamplesi}\alph{fnexamplesii}},%
+}
 %
 % Defaults for 3rd level
-\SetEnumitemKey{ex3defaults}{%
-  label={(\roman*)},%
-  ref={\arabic{examplesi}\alph{examplesii}\roman{examplesiii}},%
+\SetEnumitemKey{ex3spacingdefaults}{%
   labelindent=0pt,%
   leftmargin=1\parindent,%
   labelsep=*,%
@@ -103,18 +125,40 @@
   % Vertical spacing
   topsep=0.25\baselineskip%
 }
-\setlist[examples,3]{ex3defaults}
-% A style for lists footnotes --- note that this is NOT automatically
-% loaded. To get the style, you have to explicitly do \begin{examples}[footnote]
-% or \begin{exe}[footnote].
-\SetEnumitemKey{footnote}{%
-    label={(\roman*)},%
-    ref={(\roman{examplesi})},%
-    resume=footnoteex,
-    start=1,
+\SetEnumitemKey{ex3defaults}{%
+  label={(\roman*)},%
+  ref={\arabic{examplesi}\alph{examplesii}\roman{examplesiii}},%
+  ex3spacingdefaults,
 }
+\setlist[examples,3]{ex3defaults}
+\setlist[fnexamples,3]{
+  ex3spacingdefaults,%
+  label={(\roman*)},%
+  ref={\roman{fnexamplesi}\alph{fnexamplesii}\roman{fnexamplesiii}},%
+}
+%
 \newcommand{\beforeexamplelist}{}
 \newcommand{\afterexamplelist}{}
+\newcommand{\footnotizeexamples}{%
+  \let\textexamples\examples
+  \let\endtextexamples\endexamples
+  \let\examples\fnexamples
+  \let\endexamples\endfnexamples
+  \restartlist{fnexamples}
+}
+\newcommand{\unfootnotizeexamples}{%
+  \let\examples\textexamples
+  \let\endexamples\endtextexamples
+}
+% Borrowed from linguex.sty --- this is a dirty hack, I dislike it.
+% Also, it will not work with various other packages.
+\let\predefinedfootnotetext=\@footnotetext
+\long\def\@footnotetext#1{%
+  \footnotizeexamples%
+  \predefinedfootnotetext{#1}%
+  \unfootnotizeexamples
+}
+%
 % \exref command (aliased as \ex) for convenient reference to examples.
 \newcommand{\exref}[2][]{(\ref{#2}#1)}
 \let\ex\exref
