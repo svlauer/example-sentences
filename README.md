@@ -227,4 +227,23 @@ the example label as an optional argument:
 ```latex
 \ex{imperative}[a-f] show the varied uses of imperatives.
 ```
+## Package Options
 
+### Short form commands with `shortform`
+
+If you cannot live without typing `\ex` in example environment, you can load
+the package as `\usepackage[shortform][example_sentences]`. This enables the
+short names `exe` (for the environment) and `\ex` (for the `\item` command).
+So the initial example can then be rewritten as:
+
+```latex
+\begin{exe}
+  \ex \begin{exe}
+    \ex An example with sub-examples.
+    \ex \begin{exe}
+        \ex And sub-sub examples, like this one.
+        \ex And a second one.
+    \end{exe}
+  \end{exe}
+\end{exe}
+```
