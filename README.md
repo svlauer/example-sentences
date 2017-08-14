@@ -247,3 +247,10 @@ So the initial example can then be rewritten as:
   \end{exe}
 \end{exe}
 ```
+`\ex` supports all the niceties of the `\item` command (provided `xparse` is
+available), so all of `\ex<*>`, `\ex(label)<\#>`, `\ex{label}<?>` and 
+`\ex[(2)]<*>` are valid.
+
+For obvious reasons, the reference convenience command `\ex` will not be 
+available in within example environments in `shortform` mode (it continues
+to work outside of the environment). You can use its alias `\exref` instead.
