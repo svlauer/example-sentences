@@ -227,6 +227,42 @@ the example label as an optional argument:
 ```latex
 \ex{imperative}[a-f] show the varied uses of imperatives.
 ```
+## Customization
+
+The `examples` environment is highly configurable. It is simply a clone of
+the standard `enumerate` environment, created by `enumitem`. As a result, all
+of the configuration options of that package are available.
+
+For example, if you want to add a bit more space between example number for
+one particular example list (e.g., to accommodate and extra-long diacritic),
+you can simply pass configuration options to the example environment:
+
+```latex
+\begin{examples}[leftmargin=2.5\parindent]
+    \item<*****> Sentence very a bad is.
+\end{examples}
+```
+
+If you want to *globally* change how lists look, you can use `enumitem`'s
+`\setlist` command. Note that this command *replaces* the list configuration,
+rather than overwrite individual parameters. Hence, the following won't quite
+work, because it deletes the settings for how example numbers should be 
+formatted, and so forth:
+```latex
+\setlist[examples,1]{leftmargin=2.5\parindent}
+```
+To make it easier to overwrite single settings `example_sentences` adds 
+configuration options that hold the default values. So instead, write:
+```latex
+\setlist[examples,1]{ex1defaults,leftmargin=2.5\parindent}
+```
+`ex1defaults` holds the default settings for examples of level 1, `ex2defaults`,
+`ex3defaults` those for nested example lists. `exdefaults` holds the defaults
+for all lists.
+
+For details about the many configuration options, see [the documentation of
+`enumitem`](http://mirrors.ctan.org/macros/latex/contrib/enumitem/enumitem.pdf).
+
 ## Package Options
 
 ### Short form commands with `shortform`
