@@ -1,5 +1,4 @@
-# example_sentences
-A LaTeX package for (better) linguistic examples
+# `example_sentences.sty` A LaTeX package for linguistic examples
 
 ## Motivation
 
@@ -10,8 +9,8 @@ optionally can have subexamples, as in (2) below.
 
 ![An example of an example](http://www.sven-lauer.net/files/examples/simple_example.png?new)
 
-The platonic ideal of a LaTeX package for typesetting such examples whould 
-define an environment that behaves as much as possible as LaTeX's
+The platonic ideal of a LaTeX package for typesetting such examples would 
+provide an environment that behaves as much as possible as LaTeX's
 built-in `enumerate` lists (because, at heart, example lists *are* just ordered
 lists). So the above examples would be typeset as:
 
@@ -66,9 +65,6 @@ of your document:
 ```latex
 \usepackage{example_sentences}
 ```
-
-There are some package options, which will be described later in this document.
-
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you already
