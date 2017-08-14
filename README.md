@@ -61,17 +61,15 @@ recent-ish TeX installations, as far as I know.
 As usual, simply place `example_sentences.sty` some place where TeX can find it
 (the directory where your tex files live will work if all else fails).
 
-## Usage
-
-Load in the usual way, by placing the following in the preamble of your
-document:
+Then you can load in the usual way, by placing the following in the preamble
+of your document:
 ```latex
 \usepackage{example_sentences}
 ```
 
-There are some package options, which will be described later.
+There are some package options, which will be described later in this document.
 
-### Zero learning curve
+## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you already
 know how to use `example_sentences`. All that changes for basic usage is that
@@ -133,13 +131,13 @@ above will render as:
 However, explicit use of the `\diacritic{}` command is discouraged. Instead,
 you should use (if possible) the convenience macros described below.
 
-### Syntactic sugar: Enhancements
+### Syntactic sugar: Some enhancements for `\item`
 
 If you have `xparse.sty` available, which is contained in 
 [l3packages](https://www.ctan.org/pkg/l3packages), a number of enhancements
 of the basic `\item` command are available.
 
-#### Diacritics with `\item<>`
+### Diacritics with `\item<>`
 
 All variants of `\item` (including the ones described below) allow for an 
 optional argument in angle brackets containing a diacritic/acceptability mark:
@@ -160,7 +158,7 @@ If available, this style is preferred over the explicit use of `\diacritic{}`.
 likely wreak havoc when `example_sentences` is used with the `beamer` package
 to produce slide shows. So there is a chance this will change in the future.
 
-#### Assigning labels with `\item()`
+### Assigning labels with `\item()`
 
 The basic `\label{}` command works as it always does. However, a more convenient
 way to assign labels to examples is provided. Simply supply the desired `label`
@@ -177,7 +175,7 @@ This is equivalent to:
 \end{examples}
 ```
 
-#### Cross-references with `\item{}`
+### Cross-references with `\item{}`
 
 Sometimes it is convenient to give one example the same number as a previous
 one (for example, if the second example is a repetition of earlier one). I've
@@ -199,9 +197,9 @@ sub-example-references will work as expected.
 repeated examples consecutively, and indicate that the
 example is repeated in another fashion. 
 
-### References to examples
+## Referencing examples in the text
 
-The standard `\ref{}` command words for examples. However, it produces the
+The standard `\ref{}` command works for examples. However, it produces the
 (sub)example number without enclosing parentheses. This means that it would
 have to be used in running text with explicit parentheses: 
 ```latex
@@ -215,7 +213,7 @@ This is by design, because it is sometimes necessary to access the example
 identifier itself. An example is if one wants to reference a range of 
 sub-examples, as in:
 ```latex
-(\ref{imperative}a-f) show the varied uses of imperatives.
+(\ref{imperatives}a-f) show the varied uses of imperatives.
 ```
 However, the package provides a handy shortcut for example references. Instead of 
 writing `(\ref{harlem})`, you can simply write:
@@ -225,7 +223,7 @@ writing `(\ref{harlem})`, you can simply write:
 And, as an added nicety, you can provide arbitrary material that is appended to
 the example label as an optional argument:
 ```latex
-\ex{imperative}[a-f] show the varied uses of imperatives.
+\ex{imperatives}[a-f] show the varied uses of imperatives.
 ```
 ## Customization
 
