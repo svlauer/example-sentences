@@ -113,6 +113,9 @@
     resume=footnoteex,
     start=1,
 }
+\newcommand{\beforeexamplelist}{}
+\newcommand{\afterexamplelist}{}
+% \exref command (aliased as \ex) for convenient reference to examples.
 \newcommand{\exref}[2][]{(\ref{#2}#1)}
 \let\ex\exref
 % Enable short form synonyms
@@ -121,7 +124,8 @@
     \let\endexe\endexamples
     % At this point, we let \ex be \item, in case xparse is present, we 
     % replace it later with \exitem.
-    \let\ex\item
+    \g@addto@macro\beforeexamplelist{\let\ex\item}
+    \g@addto@macro\afterexamplelist{\let\ex\exref}    
 \fi
 % \diacritic{}: Sets a grammaticallity/acceptability judgment in the space
 % between example number and sentence. This command is used internally in
@@ -143,8 +147,6 @@
 }{%
     \@xparsefalse%
 }%
-\newcommand{\beforeexamplelist}{}
-\newcommand{\afterexamplelist}{}
 \if@xparse
     \RequirePackage{xparse}
     \let\latexitem\item
@@ -173,13 +175,14 @@
         }%
     }
     \let\ex\exref
+    \if@shortform
+        \renewcommand{\beforeexamplelist}{\let\ex\exitem}
+        \renewcommand{\afterexamplelist}{\let\ex\exref}    
+    \fi
+    
     \if@changeitem
         \g@addto@macro\beforeexamplelist{\let\item\exitem}
         \g@addto@macro\afterexamplelist{\let\item\latexitem}
-    \fi
-    \if@shortform
-        \g@addto@macro\beforeexamplelist{\let\ex\exitem}
-        \g@addto@macro\afterexamplelist{\let\ex\exref}    
     \fi
 \fi
 
