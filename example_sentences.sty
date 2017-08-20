@@ -6,8 +6,29 @@
 % Use \usepackage[normalitem]{example_sentences} to leave the original \item
 % command unchanged. You can then use \exitem instead for advanced behavior
 % that item otherwise gets, or the short version \ex (see below).
-\newif\if@changeitem\@changeitemtrue
-\DeclareOption{normalitem}{\@changeitemfalse}
+\newif\if@ExSen@changeitem\@ExSen@changeitemtrue
+\DeclareOption{normalitem}{\@ExSen@changeitemfalse}
+%
+% Package Option: noexref
+% Prevents the \exref convenience command from being defined.
+\newif\if@ExSen@define@exref\@ExSen@define@exreftrue
+\DeclareOption{noexref}{\@ExSen@define@exreffalse}
+%
+% Package Option: noex
+% Prevents the \ex command (for references) from being defined
+\newif\if@ExSen@define@ex\@ExSen@define@extrue
+\DeclareOption{noex}{\@ExSen@defineexfalse}
+%
+% Package Option: noexitem
+% Prevents the \exitem command from being defined.
+\newif\if@ExSen@define@exitem\@ExSen@define@exitemtrue
+\DeclareOption{noexitem}{\@ExSen@define@exitemfalse}
+%
+%
+% Package Option: compat
+% Implies all of the above, and also prevents processing at an earlier stage
+\newif\if@ExSen@compat\@ExSen@dcompatfalse
+\DeclareOption{compat}{\@ExSen@compattrue}
 %
 % Package Option: shortform
 % Use \usepackage[shortform]{example_sentences} defines short names for the
@@ -15,7 +36,7 @@
 % is valid:
 %    \begin{exe}
 %       \ex(weird)<?> This example is weird.
-%       \ex(not-weird) This is example is not as weird as \ref{weird}.
+%       \ex(not-weird) This is example is not as weird as \ex{weird}.
 %    \end{exe}
 % Short forms are simply additional synonyms, so they can be freely intermixed
 % with the long form commands.
@@ -42,18 +63,24 @@
 \fi
 %  
 % example_sentences is actually just a thin wrapper around the enumitem package
+% (plus some convenience commands)
 \RequirePackage{enumitem}
+%
+% SETTING UP THE LISTS
 %
 % Define example lists as a clone fo enumerate. 
 \newlist{examples}{enumerate}{3}
-% We define a separate list for use in footnotes, as this is the cleanest way
-%to handle those.
+% Define a separate list for use in footnotes, as this is the cleanest way
+% to handle those.
 \newlist{fnexamples}{enumerate}{3}
-
 %
-% We define the defauls as keys, to make it easier to change specific settings.
-%
-% Defaults for all lists (overwritten by more spefic features set below)
+% CONFIGURING THE LISTS
+% 
+% We define the defaults as keys, then immediately apply them. This is to make
+% it easier to overwrite specific settings. Since footnote examples share 
+% spacing defaults with the in-text examples, we define spacing defaults for
+% each level separately.
+% All lists:
 \SetEnumitemKey{exdefaults}{%
     align=left,%
     parsep=0pt,%
@@ -61,10 +88,12 @@
     partopsep=0pt,%
 }
 \setlist[examples]{exdefaults}
-\setlist[fnexamples]{exdefaults}
-
+% for consistence ...
+\SetEnumitemKey{fnexdefaults}{%
+    exdefaults,%
+}
+\setlist[fnexamples]{fnexdefaults}
 %
-% Set properties for first level
 \SetEnumitemKey{ex1spacingdefaults}{%
   % Horizontal Spacing -- defaults should play well with label up to four
   % digits long, plus parens
@@ -76,23 +105,25 @@
   % vertical spacing
   itemsep=0.5\baselineskip,%
   topsep=0.75\baselineskip,
-  before=\beforeexamplelist,
-  after=\afterexamplelist,%
+  before=\ExSen@beforelist,
+  after=\afterExSen@afterlist,%
 }
-
+%
 \SetEnumitemKey{ex1defaults}{
+  ex1spacingdefaults,%
   label={(\arabic*)},%
   ref={\arabic{examplesi}},
-  ex1spacingdefaults,
   resume=examples,%
 }
 \setlist[examples,1]{ex1defaults}
-\setlist[fnexamples,1]{
+\SetEnumitemKey{fnex1defaults}{
   ex1spacingdefaults,%
   label={(\roman*)},%
   ref={(\roman{fnexamplesi})},%
   resume,%
 }
+\setlist[fnexamples,1]{fnex1defaults}
+%
 \SetEnumitemKey{ex2spacingdefaults}{%
   % Horizontal spacing
   labelindent=0pt,%
@@ -105,17 +136,19 @@
 
 }
 \SetEnumitemKey{ex2defaults}{%
+  ex2spacingdefaults,%
   label={\alph*.},%
   ref={\arabic{examplesi}\alph{examplesii}},%
-  ex2spacingdefaults,
 }
 \setlist[examples,2]{ex2defaults}
-\setlist[fnexamples,2]{ex2spacingdefaults,%
-  label={\alph*.},%
-  ref={\roman{fnexamplesi}\alph{fnexamplesii}},%
-}
 %
-% Defaults for 3rd level
+\SetEnumitemKey{fnex2defaults}{%
+  ex2spacingdefaults,%
+  label={\alph*.},%
+  ref={\arabic{examplesi}\alph{examplesii}},%
+}
+\setlist[fnexamples,2]{fnex2defaults}
+%
 \SetEnumitemKey{ex3spacingdefaults}{%
   labelindent=0pt,%
   leftmargin=1\parindent,%
@@ -126,19 +159,27 @@
   topsep=0.25\baselineskip%
 }
 \SetEnumitemKey{ex3defaults}{%
+  ex3spacingdefaults,%
   label={(\roman*)},%
   ref={\arabic{examplesi}\alph{examplesii}\roman{examplesiii}},%
-  ex3spacingdefaults,
 }
-\setlist[examples,3]{ex3defaults}
-\setlist[fnexamples,3]{
+\setlist[examples,3]{fnex3defaults}
   ex3spacingdefaults,%
   label={(\roman*)},%
   ref={\roman{fnexamplesi}\alph{fnexamplesii}\roman{fnexamplesiii}},%
+\SetEnumitemKey{ex3defaults}{%
 }
+\setlist[fnexamples,3]{fnex3defaults}
 %
-\newcommand{\beforeexamplelist}{}
-\newcommand{\afterexamplelist}{}
+% SET UP INTERNAL COMMANDS
+%
+\newcommand{\ExSen@beforelist}{}
+\newcommand{\ExSen@afterlist}{}
+%
+% FOOTNOTE HANDLING
+% \footnotizeexamples has to be called before the first
+% example in a footnote, \unfootnotizeexamples after the
+% last.
 \newcommand{\footnotizeexamples}{%
   \let\textexamples\examples
   \let\endtextexamples\endexamples
@@ -150,33 +191,34 @@
   \let\examples\textexamples
   \let\endexamples\endtextexamples
 }
+% We patch the footnote command of the standard LaTeX packages.
 % Borrowed from linguex.sty --- this is a dirty hack, I dislike it.
 % Also, it will not work with various other packages.
-\let\predefinedfootnotetext=\@footnotetext
+\let\ExSen@footnotetext=\@footnotetext
 \long\def\@footnotetext#1{%
   \footnotizeexamples%
-  \predefinedfootnotetext{#1}%
-  \unfootnotizeexamples
+  \ExSen@footnotetext{#1}%
+  \unfootnotizeexamples%
 }
-%
-% \exref command (aliased as \ex) for convenient reference to examples.
-\newcommand{\exref}[2][]{(\ref{#2}#1)}
-\let\ex\exref
-% Enable short form synonyms
-\if@shortform
-    \let\exe\examples
-    \let\endexe\endexamples
-    % At this point, we let \ex be \item, in case xparse is present, we 
-    % replace it later with \exitem.
-    \g@addto@macro\beforeexamplelist{\let\ex\item}
-    \g@addto@macro\afterexamplelist{\let\ex\exref}    
+% In compat mode, we abort here, before any of the convenience commands
+% are defined.
+\if@ExSen@compat
+    \endinput
 \fi
+% CONVENIENCE COMAND DEFINITIONS
+% We first define internal versions of all commands (prefixed with ExSen@),
+% and expose them later, based on the package options. In the inline comments, 
+% we refer to the exposed command names.
+%
+% \exref command (standardly aliased as \ex), for convenient reference to examples.
+\newcommand{\ExSen@exref}[2][]{(\ref{#2}#1)}
+%
 % \diacritic{}: Sets a grammaticallity/acceptability judgment in the space
 % between example number and sentence. This command is used internally in
 % the \(ex)item commands, but maybe useful for the user in environments where
 % xparse is not available.
 % The definition of this command is borrowed from Alexander Holt's example.sty
-\newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.15 em}\ignorespaces}
+\newcommand{\ExSen@diacritic}[1]{\leavevmode \llap{#1\kern 0.15 em}\ignorespaces}
 %
 % A flexible item command for examples. Can be used in the following ways
 %  - \exitem Standard use without argument.
@@ -193,41 +235,76 @@
 }%
 \if@xparse
     \RequirePackage{xparse}
-    \let\latexitem\item
-    \NewDocumentCommand{\exitem}{o d() g d<>}{%
+    % We make a copy of latex \item command at the time that this package is
+    % loaded. This way, nothing odd will happen in case a later package changes
+    % the behavior of \item
+    \let\ExSen@item\item
+    \NewDocumentCommand{\ExSen@exitem}{o d() g d<>}{%
         \IfValueTF{#1}{%
-            \latexitem[#1]%
+            \ExSen@tem[#1]%
         }{%
             \IfValueTF{#2}{%
-                \latexitem \label{#2}%
+                \ExSen@item \label{#2}%
             }{%
                 \IfValueTF{#3}{%
-                    \latexitem[\exref{#3}]%
+                    \ExSen@item[\ExSen@exref{#3}]%
                 }{
-                    \latexitem%
+                    \ExSen@item%
                 }
             }%
         }%
         \IfValueT{#4}{%
-            \diacritic{#4}
+            \ExSen@diacritic{#4}
         }%
     }
-    \let\oldexref\exref
-    \RenewDocumentCommand{\exref}{o m o}{%
-        \IfValueTF{#1}{\oldexref[#1]{#2}}{%
-          \IfValueTF{#3}{\oldexref[#3]{#2}}{\oldexref{#2}}%
+    % If xparse is available, we also enable a version of 
+    % \ex(ref) that takes its optional argument last, as 
+    % this is often more inuitive
+    \let\ExSen@oldexref\ExSen@exref
+    \RenewDocumentCommand{\ExSen@exref}{o m o}{%
+        \IfValueTF{#1}{\ExSen@oldexref[#1]{#2}}{%
+          \IfValueTF{#3}{\ExSen@oldexref[#3]{#2}}{\ExSen@oldexref{#2}}%
         }%
     }
-    \let\ex\exref
-    \if@shortform
-        \renewcommand{\beforeexamplelist}{\let\ex\exitem}
-        \renewcommand{\afterexamplelist}{\let\ex\exref}    
-    \fi
+\fi
+%
+% EXPOSING THE CONVENIENCE API COMMANDS
+%
+\if@ExSen@define@exitem
+    \let\exitem\ExSen@item
+\fi
+\if@ExSen@define@exref
+    \let\exref\ExSen@exref
+\fi
+\if@ExSen@define@ex
+    \let\ex\ExSen@exref
+\fi
+\if@ExSen@changeitem
+    \renewcommand{\ExSen@beforelist}{%
+        % Save the CURRENT implementation of \item, in order to restore it.
+        % Note that \item may be different from \ExSen@item at this point,
+        % if a package loaded after example_sentences changed \item.
+        \let\ExSen@latexitem%
+        \let\item\ExSen@exitem%
+    }
+    \renewcommand{\afterExSen@afterlist}{\let\item\ExSen@latexitem}
+\fi
+\if@ExSen@shortform
+    % Alias the example environment as `exe`
+    \let\exe\examples
+    \let\endexe\endexamples
+    % Define \ex to be \exitem within example lists ...
+    \g@addto@macro\ExSen@beforelist{\let\ex\ExSen@exitem}
     
-    \if@changeitem
-        \g@addto@macro\beforeexamplelist{\let\item\exitem}
-        \g@addto@macro\afterexamplelist{\let\item\latexitem}
+    \renewcommand{\ExSen@beforelist}{}
+    % ... but it retains its reference meaning outside (if not disabled).
+    \if@ExSen@define@ex
+        \g@addto@macro\afterExSen@afterlist{\let\ex\ExSen@exref}
     \fi
 \fi
-
-   
+% Expose \diacritic
+\let\diacritic\ExSen@diacritic
+% Finally, for the sticklers: Alias `examples` environment as `example`
+\let\example\examples
+\let\endexample\endexamples
+    
