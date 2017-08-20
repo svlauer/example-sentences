@@ -199,11 +199,11 @@ The standard `\ref{}` command works for examples. However, it produces the
 (sub)example number without enclosing parentheses. This means that it would
 have to be used in running text with explicit parentheses: 
 ```latex
-(\ref{harlem}) is curious in that ...
+The sentence in (\ref{harlem}) is curious in that ...
 ```
 rather than
 ```latex
-\ref{harlem} is curious in that ...
+The sentence in \ref{harlem} is curious in that ...
 ```
 This is by design, because it is sometimes necessary to access the example 
 identifier itself. An example is if one wants to reference a range of 
@@ -211,11 +211,16 @@ sub-examples, as in:
 ```latex
 (\ref{imperatives}a-f) show the varied uses of imperatives.
 ```
-However, the package provides a handy shortcut for example references. Instead of 
-writing `(\ref{harlem})`, you can simply write:
+However, the package provides two handy shortcut for example references. Instead of 
+writing `(\ref{harlem})`, you can simply write either:
 ```latex
-\ex{harlem} is curious in that ...
+The sentence in \exref{harlem} is curious in that ...
 ```
+or:
+```latex
+The sentence in \ex{harlem} is curious in that ...
+```
+
 And, as an added nicety, you can provide arbitrary material that is appended to
 the example label as an optional argument:
 ```latex
@@ -374,6 +379,5 @@ entirely different from the main `examples` (it is just mostly configured in
 the same way). If you want to modify the appearance of examples in footnotes,
 you'll need to use `\setlist[fnexamples]{}` / `\setlist[fnexamples,1]{}`, etc.
 Make sure that you do not use the `ex1defaults`/`ex2defaults`/`ex3defaults` 
-keywords in this case, as this will reuse the main counters. Instead, you can 
-use the `ex1spacingdefaults`/`ex2spacingdefaults`/`ex3spacingdefaults` to get
-the spacing defaults for the three levels only.
+keywords in this case, as this will reuse the main counters. Instead, use
+ `fnex1defaults`/`fnex2defaults`/`fnex3defaults`.
