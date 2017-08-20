@@ -226,6 +226,8 @@ the example label as an optional argument:
 ```latex
 \ex{imperatives}[a-f] show the varied uses of imperatives.
 ```
+(The latter form will only work if `xparse.sty` is available. Otherwise, you can
+use `\ex[a-f]{imperatives}`, which will always work.)
 ## Customization
 
 The `examples` environment is highly configurable. It is simply a clone of
