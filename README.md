@@ -1,19 +1,17 @@
 # The `example_sentences.sty` package for typesetting linguistic example sentences
 
-Contents
-=================
 
-* [The example\_sentences\.sty package for typesetting linguistic example sentences](#the-example_sentencessty-package-for-typesetting-linguistic-example-sentences)
-  * [Dependencies](#dependencies)
-  * [Installation](#installation)
-  * [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
-  * [Syntactic sugar: Some enhancements for \\item](#syntactic-sugar-some-enhancements-for-item)
+
+* [Dependencies](#dependencies)
+* [Installation](#installation)
+* [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
+* [Syntactic sugar: Some enhancements for \\item](#syntactic-sugar-some-enhancements-for-item)
     * [Diacritics with \\item&lt;&gt;](#diacritics-with-item)
     * [Assigning labels with \\item()](#assigning-labels-with-item)
     * [Cross\-references with \\item\{\}](#cross-references-with-item)
-  * [Referencing examples in the text](#referencing-examples-in-the-text)
-  * [Customization](#customization)
-  * [Package Options](#package-options)
+* [Referencing examples in the text](#referencing-examples-in-the-text)
+* [Customization](#customization)
+* [Package Options](#package-options)
     * [Short form commands with shortform](#short-form-commands-with-shortform)
     * [Compatibility options: Turning of convenience commands](#compatibility-options-turning-of-convenience-commands)
       * [Leaving \\item alone: the normalitem option](#leaving-item-alone-the-normalitem-option)
@@ -21,7 +19,7 @@ Contents
       * [Turning off all enhancements: noexitem and compat](#turning-off-all-enhancements-noexitem-and-compat)
     * [The enumitemize option](#the-enumitemize-option)
     * [Other options](#other-options)
-  * [Known issues](#known-issues)
+* [Known issues](#known-issues)
     * [Footnotes](#footnotes)
 
 
