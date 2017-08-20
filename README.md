@@ -1,29 +1,5 @@
 # The `example_sentences.sty` package for typesetting linguistic example sentences
 
-
-
-* [Dependencies](#dependencies)
-* [Installation](#installation)
-* [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
-* [Syntactic sugar: Some enhancements for \\item](#syntactic-sugar-some-enhancements-for-item)
-    * [Diacritics with \\item&lt;&gt;](#diacritics-with-item)
-    * [Assigning labels with \\item()](#assigning-labels-with-item)
-    * [Cross\-references with \\item\{\}](#cross-references-with-item)
-* [Referencing examples in the text](#referencing-examples-in-the-text)
-* [Customization](#customization)
-* [Package Options](#package-options)
-    * [Short form commands with shortform](#short-form-commands-with-shortform)
-    * [Compatibility options: Turning of convenience commands](#compatibility-options-turning-of-convenience-commands)
-      * [Leaving \\item alone: the normalitem option](#leaving-item-alone-the-normalitem-option)
-      * [Turning off ference commands with the noexref and noex options](#turning-off-ference-commands-with-the-noexref-and-noex-options)
-      * [Turning off all enhancements: noexitem and compat](#turning-off-all-enhancements-noexitem-and-compat)
-    * [The enumitemize option](#the-enumitemize-option)
-    * [Other options](#other-options)
-* [Known issues](#known-issues)
-    * [Footnotes](#footnotes)
-
-
-
 Linguists (and scholars in related fields) use a lot of example sentences in
 their writing. There is a fairly accepted standard for format for presenting 
 those: Example sentences are numbered continuously throughout a document, and
@@ -63,7 +39,18 @@ the University of Edinburgh) floating around that provides
 something closer to the ideal, but it has a number of features that I disliked,
 so I decided to create my own.
 
-## Dependencies
+## Installation
+
+As usual, simply place `example_sentences.sty` some place where TeX can find it
+(the directory where your tex files live will work if all else fails).
+
+Then you can load in the usual way, by placing the following in the preamble
+of your document:
+```latex
+\usepackage{example_sentences}
+```
+
+### Dependencies
 
 - [enumitem](https://www.ctan.org/pkg/enumitem) is the only required dependency.
 
@@ -77,16 +64,6 @@ so I decided to create my own.
 Both of these are available in CTAN and should be part of most 
 recent-ish TeX installations, as far as I know.
 
-## Installation
-
-As usual, simply place `example_sentences.sty` some place where TeX can find it
-(the directory where your tex files live will work if all else fails).
-
-Then you can load in the usual way, by placing the following in the preamble
-of your document:
-```latex
-\usepackage{example_sentences}
-```
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you already
