@@ -48,22 +48,7 @@ Then you can load in the usual way, by placing the following in the preamble
 of your document:
 ```latex
 \usepackage{example_sentences}
-```
-
-### Dependencies
-
-- [enumitem](https://www.ctan.org/pkg/enumitem) is the only required dependency.
-
-  (In fact, the main part of `example_sentences` is just a paper-thin wrapper 
-  around `enumitem`'s functionality.]
-- The `xparse` package (available as part of
-  [l3packages](https://www.ctan.org/pkg/l3packages)) is not required, but if
-  it is present, it is used to provide some nice syntactic sugar for the `\item` 
-  commands.
-  
-Both of these are available in CTAN and should be part of most 
-recent-ish TeX installations, as far as I know.
-
+````
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you already
@@ -227,6 +212,20 @@ the example label as an optional argument:
 ```
 (The latter form will only work if `xparse.sty` is available. Otherwise, you can
 use `\ex[a-f]{imperatives}`, which will always work.)
+
+## Dependencies
+
+- [enumitem](https://www.ctan.org/pkg/enumitem) is the only required dependency.
+
+  (In fact, the main part of `example_sentences` is just a paper-thin wrapper 
+  around `enumitem`'s functionality.]
+- The `xparse` package (available as part of
+  [l3packages](https://www.ctan.org/pkg/l3packages)) is not required, but if
+  it is present, it is used to provide some nice syntactic sugar for the `\item` 
+  commands.
+  
+Both of these are available in CTAN and should be part of most 
+recent-ish TeX installations, as far as I know.
 ## Customization
 
 The `examples` environment is highly configurable. It is simply a clone of
