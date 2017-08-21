@@ -1,15 +1,15 @@
-# The `example_sentences.sty` package for typesetting linguistic example sentences
+# The `example_sentences.sty` package for typesetting linguistic examples
 
-Linguists (and scholars in related fields) use a lot of example sentences in
-their writing. There is a fairly accepted standard for format for presenting 
+Linguists (and scholars in related fields) use example sentences in their 
+writing. There is a fairly accepted standard for format for presenting 
 those: Example sentences are numbered continuously throughout a document, and
 optionally can have subexamples, as in (2) below.
 
 ![An example of an example](http://www.sven-lauer.net/files/examples/simple_example.png?new)
 
 The platonic ideal of a LaTeX package for typesetting such examples would 
-provide an environment that behaves as much as possible as LaTeX's
-built-in `enumerate` lists (because, at heart, example lists *are* just ordered
+provide an environment that behaves as much as possible as LaTeX's built-in 
+`enumerate` lists (because, at heart, example lists *are* just ordered
 lists). So the above examples would be typeset as:
 
 ```latex
@@ -22,22 +22,21 @@ lists). So the above examples would be typeset as:
 \end{examples}
 ```
 
-The existing packages that I know of fall short of this ideal in several ways.
-While [linguex.sty](https://www.ctan.org/tex-archive/macros/latex/contrib/linguex?lang=en)
-has a very concise syntax that very readable (which is why I favored
-it for a long time), it betrays its TeX roots through various quirks. For
-example, it has very particular  whitespace requirements, which can make 
-working with it a hassle. The same true for 
-[expex.sty](https://www.ctan.org/pkg/expex?lang=en), which also
-features a rather exotic syntax that I've always found too difficult to remember. 
-And then there is [gb4e.sty](https://www.ctan.org/pkg/gb4e?lang=en), which is 
-more LaTeXy then the other ones, but which has a number of strange 
-inconsistencies.
+The existing packages that I know of fall short of this ideal in several ways. 
+While 
+[linguex.sty](https://www.ctan.org/tex-archive/macros/latex/contrib/linguex?lang=en)
+has a concise syntax that very readable (which is why I favored it for a long 
+time), it betrays its TeX roots through various quirks. For example, it has 
+very  particular whitespace requirements, which can make working with it a 
+hassle. The same true for [expex.sty](https://www.ctan.org/pkg/expex?lang=en), 
+which also features a rather exotic syntax that I've always found too difficult to remember. And then there is 
+[gb4e.sty](https://www.ctan.org/pkg/gb4e?lang=en), which is more LaTeXy then 
+the other ones, but which has a number of strange inconsistencies.
 
 There is an old style file called `examples.sty` (written by Alexander Holt at 
-the University of Edinburgh) floating around that provides
-something closer to the ideal, but it has a number of features that I disliked,
-so I decided to create my own.
+the University of Edinburgh) floating around that provides something closer to 
+the ideal, but it has a number of features that I disliked, so I decided to 
+create my own.
 
 ## Installation
 
@@ -48,7 +47,10 @@ Then you can load in the usual way, by placing the following in the preamble
 of your document:
 ```latex
 \usepackage{example_sentences}
-````
+```
+
+There are a number of [package options](#package-options), described below.
+
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you already
@@ -321,7 +323,7 @@ commands `\exref` and `\ex` to produce reference to examples in the running
 text. You can turn them off by loading the package as:
 ```latex
 \usepackage[noexref,noex]{example_sentences}
-````
+```
 Indeed, if you are using another reference package, it is recommended that you
 use this way of loading `example_sentences`, to avoid cluttering the LaTex
 namespace.
@@ -341,15 +343,15 @@ options). If you desire this, there is a shortcut, which also prevents some
 internal processing that might lead to incompatibilities:
 ```latex
 \usepackage[compat]{example_sentences}
-````
+```
 Note that `compat` implies `normalitem,noexref,noex,noexitem`.
 
 
 ### The `enumitemize` option
 
-Standardly, `example_sentences` loads the `enumitem` package with the `loadonly`
-option, which ensures that the standard LaTeX lists (`enumerate`,`itemize` and
-`description`) are not enhanced by `enumitem`.
+Standardly, `example_sentences` loads the `enumitem` package with the 
+`loadonly` option, which ensures that the standard LaTeX lists (`enumerate`,
+`itemize` and `description`) are not enhanced by `enumitem`.
 
 If you want to change this, pass the `enumitemize` option to 
 `example_sentences`.
@@ -367,12 +369,12 @@ It is custom to number examples in footnotes differently from the main text:
 Level one examples have lowercase roman numerals as labels, with counting 
 starting anew for each footnote.
 
-This is difficult to achieve in the general case. `example_sentences` patches
-the standard LaTeX footnote commands (i.e., `\footnote` and `footnotetext`),
-for all other methods of typesetting notes, you will have to ensure yourself
-that the command `\footnotizeexamples` is called at the beginning of each note
-(or before the first example) and `\unfootnotizeexamples` is called at the 
-end of each footnote (or after the last example).
+This is difficult to achieve in the general case. `example_sentences.sty` 
+patches the standard LaTeX footnote commands (i.e., `\footnote` and 
+`footnotetext`), for all other methods of typesetting notes, you will have 
+to ensure yourself that the command `\footnotizeexamples` is called at the 
+beginning of each note (or before the first example) and `\unfootnotizeexamples` 
+is called at the  end of each footnote (or after the last example).
 
 *Note on implementation*: The example environments used in footnotes is in fact
 entirely different from the main `examples` (it is just mostly configured in 
