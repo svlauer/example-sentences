@@ -216,10 +216,6 @@ have to be used in running text with explicit parentheses:
 ```latex
 The sentence in (\ref{harlem}) is curious in that ...
 ```
-rather than
-```latex
-The sentence in \ref{harlem} is curious in that ...
-```
 This is by design, because it is sometimes necessary to access the example 
 identifier itself. An example is if one wants to reference a range of 
 sub-examples, as in:
