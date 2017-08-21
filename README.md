@@ -1,6 +1,6 @@
 # The `example_sentences.sty` package for typesetting linguistic examples
 
-<!-- MarkdownTOC -->
+<!-- MarkdownTOC  depth=2 -->
 
 - [Installation](#installation)
 - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
