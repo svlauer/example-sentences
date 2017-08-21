@@ -3,14 +3,22 @@
 <!-- MarkdownTOC -->
 
 - [Installation](#installation)
-  - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
-  - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-%5Citem)
-  - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-%5Cbeginexample--%5Cendexample)
-  - [Referencing examples in the text](#referencing-examples-in-the-text)
-  - [Dependencies](#dependencies)
-  - [Customization](#customization)
-  - [Package Options](#package-options)
-  - [Known issues](#known-issues)
+- [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
+- [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-%5Citem)
+  - [Diacritics with `\item`](#diacritics-with-%5Citem)
+  - [Assigning labels with `\item()`](#assigning-labels-with-%5Citem)
+  - [Cross-references with `\item{}`](#cross-references-with-%5Citem)
+- [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-%5Cbeginexample--%5Cendexample)
+- [Referencing examples in the text](#referencing-examples-in-the-text)
+- [Dependencies](#dependencies)
+- [Customization](#customization)
+- [Package Options](#package-options)
+  - [Short form commands with `shortform`](#short-form-commands-with-shortform)
+  - [Compatibility options: Turning of convenience commands](#compatibility-options-turning-of-convenience-commands)
+  - [The `enumitemize` option](#the-enumitemize-option)
+  - [Other options](#other-options)
+- [Known issues](#known-issues)
+  - [Footnotes](#footnotes)
 
 <!-- /MarkdownTOC -->
 
@@ -54,7 +62,7 @@ the University of Edinburgh) floating around that provides something closer to
 the ideal, but it has a number of features that I disliked, so I decided to 
 create my own.
 
-# Installation
+## Installation
 
 As usual, simply place `example_sentences.sty` some place where TeX can find it
 (the directory where your tex files live will work if all else fails).
