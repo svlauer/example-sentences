@@ -6,7 +6,7 @@
 - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-%5Citem)
 - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-%5Cbeginexample--%5Cendexample)
-- [Referencing examples in the text: `\ref{...}`, \ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-%5Cref-%5Cex-and-%5Cexref)
+- [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-%5Cref-%5Cex-and-%5Cexref)
 - [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
@@ -208,7 +208,7 @@ users, there is a synonym `example`, so you can write:
 (You will still have to type `\item`, though. This may change in future releases.)
 
 This is a true alias of the `examples` environment, so nothing prevents multiple examples in an `example` environment.
-## Referencing examples in the text: `\ref{...}`, \ex{...}`, and `\exref{...}`
+## Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`
 
 The standard `\ref{}` command works for examples. However, it produces the
 (sub)example number without enclosing parentheses. This means that it would
