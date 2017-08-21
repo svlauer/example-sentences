@@ -1,5 +1,21 @@
 # The `example_sentences.sty` package for typesetting linguistic examples
 
+<!-- MarkdownTOC -->
+
+- [Installation](#installation)
+  - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
+  - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-%5Citem)
+  - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-%5Cbeginexample--%5Cendexample)
+  - [Referencing examples in the text](#referencing-examples-in-the-text)
+  - [Dependencies](#dependencies)
+  - [Customization](#customization)
+  - [Package Options](#package-options)
+  - [Known issues](#known-issues)
+
+<!-- /MarkdownTOC -->
+
+
+
 Linguists (and scholars in related fields) use example sentences in their 
 writing. There is a fairly accepted standard for format for presenting 
 those: Example sentences are numbered continuously throughout a document, and
@@ -38,7 +54,7 @@ the University of Edinburgh) floating around that provides something closer to
 the ideal, but it has a number of features that I disliked, so I decided to 
 create my own.
 
-## Installation
+# Installation
 
 As usual, simply place `example_sentences.sty` some place where TeX can find it
 (the directory where your tex files live will work if all else fails).
@@ -179,6 +195,19 @@ sub-example-references will work as expected.
 repeated examples consecutively, and indicate that the
 example is repeated in another fashion. 
 
+## Individual examples with `\begin{example} ... \end{example}`
+
+Some users (including me on certain days) will feel uncomfortable with the
+environment name `examples` in case there is only one `\item`. For those
+users, there is a synonym `example`, so you can write:
+```latex
+\begin{example}
+    \item This is an example.
+\end{example}
+```
+(You will still have to type `\item`, though. This may change in future releases.)
+
+This is a true alias of the `examples` environment, so nothing prevents multiple examples in an `example` environment.
 ## Referencing examples in the text
 
 The standard `\ref{}` command works for examples. However, it produces the
@@ -197,8 +226,7 @@ sub-examples, as in:
 ```latex
 (\ref{imperatives}a-f) show the varied uses of imperatives.
 ```
-However, the package provides two handy shortcut for example references. Instead of 
-writing `(\ref{harlem})`, you can simply write either:
+However, the package provides two handy shortcut for example references. Instead of writing `(\ref{harlem})`, you can simply write either:
 ```latex
 The sentence in \exref{harlem} is curious in that ...
 ```
@@ -212,8 +240,7 @@ the example label as an optional argument:
 ```latex
 \ex{imperatives}[a-f] show the varied uses of imperatives.
 ```
-(The latter form will only work if `xparse.sty` is available. Otherwise, you can
-use `\ex[a-f]{imperatives}`, which will always work.)
+(The latter form will only work if `xparse.sty` is available. Otherwise, you can use `\ex[a-f]{imperatives}`, which will always work.)
 
 ## Dependencies
 
