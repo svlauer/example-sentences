@@ -1,24 +1,16 @@
 # The `example_sentences.sty` package for typesetting linguistic examples
 
-<!-- MarkdownTOC  depth=2 -->
+<!-- MarkdownTOC  depth=1 -->
 
 - [Installation](#installation)
 - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-%5Citem)
-  - [Diacritics with `\item`](#diacritics-with-%5Citem)
-  - [Assigning labels with `\item()`](#assigning-labels-with-%5Citem)
-  - [Cross-references with `\item{}`](#cross-references-with-%5Citem)
 - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-%5Cbeginexample--%5Cendexample)
 - [Referencing examples in the text](#referencing-examples-in-the-text)
 - [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
-  - [Short form commands with `shortform`](#short-form-commands-with-shortform)
-  - [Compatibility options: Turning of convenience commands](#compatibility-options-turning-of-convenience-commands)
-  - [The `enumitemize` option](#the-enumitemize-option)
-  - [Other options](#other-options)
 - [Known issues](#known-issues)
-  - [Footnotes](#footnotes)
 
 <!-- /MarkdownTOC -->
 
