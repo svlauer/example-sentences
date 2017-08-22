@@ -1,18 +1,16 @@
 # The `example_sentences.sty` package for typesetting linguistic examples
 
-<!-- MarkdownTOC  depth=1 -->
 
 - [Installation](#installation)
 - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
-- [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-%5Citem)
-- [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-%5Cbeginexample--%5Cendexample)
-- [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing)
+- [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
+- [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
+- [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref-referencing)
 - [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
 - [Known issues](#known-issues)
 
-<!-- /MarkdownTOC -->
 
 
 
@@ -208,7 +206,7 @@ users, there is a synonym `example`, so you can write:
 (You will still have to type `\item`, though. This may change in future releases.)
 
 This is a true alias of the `examples` environment, so nothing prevents multiple examples in an `example` environment.
-## Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}` {#referencing}
+## Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`
 
 The standard `\ref{}` command works for examples. However, it produces the
 (sub)example number without enclosing parentheses. This means that it would
