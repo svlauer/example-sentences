@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{example_sentences}
+\begin{document}
+%
+\noindent Examples are typeset like this:
+    \begin{examples}
+        \item This is an example.
+        \item This is a second example.
+              \begin{examples}
+                  \item It has sub-examples.
+                  \item<*> Ungrammatical are this sentence.
+                        \begin{examples}
+                            \item And yet, it has sub-examples. Like this one.
+                            \item And this one.
+                        \end{examples}
+              \end{examples}
+    \end{examples}
+There are some advanced features, like concise label assignment:
+\begin{examples}
+    \item(foo) This example will have the label \verb|foo|.
+    \item(bar)<\#> This example will have the label \verb|bar|, and will be marked 
+                unacceptable.
+\end{examples}
+%
+Now we can refer to the above examples by using \verb|\ex{foo}| and \verb|\exref{bar}|, like this: \ex{foo} and \exref{bar}.
+
+Crossreferences, are also supported. if you want to repeat an example with its original 
+number, use \verb|\item{label}|:
+\begin{examples}
+    \item{foo} This example will have the label `foo'.
+\end{examples}
+%
+And, as usual, if you want to manually supply the example number, use \verb|\item[(mynumber)]|:
+\begin{examples}
+    \item[(42)] This example is numbered 42.
+\end{examples}
+%
+Finally, if you have you use a single example, you can use the singular form of the environment name:
+\begin{example}
+    \item This is a lonely example.
+\end{example}
+\end{document}
