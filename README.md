@@ -11,9 +11,6 @@
 - [Package Options](#package-options)
 - [Known issues](#known-issues)
 
-
-
-
 Linguists (and scholars in related fields) use example sentences in their 
 writing. There is a fairly accepted standard for format for presenting 
 those: Example sentences are numbered continuously throughout a document, and
@@ -39,9 +36,9 @@ lists). So the above examples would be typeset as:
 The existing packages that I know of fall short of this ideal in several ways. 
 While 
 [linguex.sty](https://www.ctan.org/tex-archive/macros/latex/contrib/linguex?lang=en)
-has a concise syntax that very readable (which is why I favored it for a long 
-time), it betrays its TeX roots through various quirks. For example, it has 
-very  particular whitespace requirements, which can make working with it a 
+has a concise syntax that is very readable (which is why I favored it for a 
+long time), it betrays its TeX roots through various quirks. For example, it 
+has very  particular whitespace requirements, which can make working with it a 
 hassle. The same true for [expex.sty](https://www.ctan.org/pkg/expex?lang=en), 
 which also features a rather exotic syntax that I've always found too difficult to remember. And then there is 
 [gb4e.sty](https://www.ctan.org/pkg/gb4e?lang=en), which is more LaTeXy then 
