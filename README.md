@@ -311,7 +311,7 @@ available), so all of `\ex<*>`, `\ex(label)<\#>`, `\ex{label}<?>` and
 `\ex[(2)]<*>` are valid.
 
 For obvious reasons, the reference convenience command `\ex` will not be 
-available in within example environments in `shortform` mode (it continues
+work within example environments in `shortform` mode (it continues
 to work outside of the environment). You can use its alias `\exref` instead.
 
 The commands introduced by `shortform` only are synonyms for the longer 
@@ -332,11 +332,11 @@ implementation of this command needs to be overwritten (this happens only
 in example lists, however). If you use any other packages that modify this
 command (`beamer` comes to mind), there could be conflicts and other problems.
 
-For this reason, the option `normalitem` tells the package to not touch the
+For this reason, the loading the package with the option `normalitem`  (i.e., `\usepackage[normalitem]{example_sentences}`) tells the package to not touch the
 `\item` command. In this case, the command `\exitem` can be used in place
 of `\item`, which has all of the advanced behavior of `\item` described above.
 
-#### Turning off ference commands with the `noexref` and `noex` options
+#### Turning off reference commands with the `noexref` and `noex` options
 
 LaTeX offers various packages (such as 
 [cleverref](https://www.ctan.org/pkg/cleveref?lang=en)) that improve on reference
