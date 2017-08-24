@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 \ProvidesPackage{example_sentences}%
-  [2017/08/22 Linguistic example sentences v.0.5.0]
+  [2017/08/24 Linguistic example sentences v.0.5.0]
 %
 % Package Option: normalitem
 % Use \usepackage[normalitem]{example_sentences} to leave the original \item
@@ -225,11 +225,7 @@
     \let\exe\examples
     \let\endexe\endexamples
      % Define \ex to be \item within example lists ...
-     \g@addto@macro\ExSen@beforelist{\let\ex\item}
-     % ... but it retains its reference meaning outside (if not disabled).
-     \if@ExSen@define@ex
-        \g@addto@macro\ExSen@afterlist{\def\ex\ExSen@exref}
-    \fi
+    \g@addto@macro\ExSen@beforelist{\let\ex\item}
 \fi
 % In compat mode, we abort here, before any of the convenience commands
 % are defined.
@@ -305,6 +301,10 @@
 \fi
 \if@ExSen@define@ex
     \let\ex\ExSen@exref
+    % In shortform mode, \ex will be changed to \exitem,
+    % so we have to reset it after.
+    \g@addto@macro\ExSen@afterlist{\let\ex\ExSen@exref}
+     
 \fi
 \if@ExSen@changeitem
    % \g@addto@macro is known to the practitioners of the dark arts (TeX)
@@ -320,15 +320,10 @@
         \let\ExSen@latexitem\item%
         \let\item\ExSen@exitem%
     }
-    \g@addto@macro\ExSen@afterlist{\let\item\ExSen@latexitem}
 \fi
 \if@ExSen@shortform
     % If we got to this point, we actually want \ex to \exitem, rather than
     % \item ...
     \g@addto@macro\ExSen@beforelist{\let\ex\ExSen@exitem}
-    % ... but it retains its reference meaning outside (if not disabled).
-    \if@ExSen@define@ex
-        \g@addto@macro\ExSen@afterlist{\let\ex\ExSen@exref}
-    \fi
 \fi
     
