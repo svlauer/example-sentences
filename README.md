@@ -384,6 +384,48 @@ All options besides the one described above will be passed through to
 `enumitem`.
 
 ## Known issues
+### Beginning and example with [...] or (...)
+
+Many linguists like to start their examples with a description of the 
+context, enclosed in square brackets [...] or, more rarely, parenthes (...). 
+Unfortunately, the package has some problems with this.
+
+If you use `\item` (or `\ex`) with any kind of argument, all will be fine (and 
+dandy). Trouble strikes when you try to start an example with [...] with a bare
+`\item`, like so:
+```latex
+\begin{examples}
+  \item [This is a description of the context]\\
+        This is the example.
+\end{examples}
+```
+The problem is that LaTeX is quite aggressive in trying to find an argument for
+`\item`. So it will consider the context description an argument, and hence treat "This is a description of the context" as a manually-supplied label.
+
+What's worse, "standard" techniques for avoiding that problem won't work. These include prefixing `{}` to the context description, or wrapping the context description in curly braces: 
+`{[This is a description of the context]}`. In both cases, LaTeX will consider
+the stuff in braces as the argument of the [`\item{}`](#cross-references-with-item)-version of the `\item` command, leading to less-than-satisfactory results.
+
+At present, the only work-around is to tell LaTex to "relax" before the context
+description:
+```latex
+\begin{examples}
+  \item \relax [This a description of the context]\\
+        This is the example.
+\end{examples}
+```
+Alternatively (recommended) make sure to give all your examples a label via the
+[convenient `\item(...)` command](assigning-labels-with-item). Then, the above becomes:
+```latex
+\begin{examples}
+  \item(mylabel) [This a description of the context]\\
+        This is the example.
+\end{examples}
+```
+
+**Note:** I consider this issue a (1.0)-release blocker (the only one, at this
+point), so any suggestions of how to overcome it are most welcome. If all else
+fails, I'll jettison the `\item{...}` crossreference syntax, so that, at least, the "standard" way to avoid the problem will work.
 
 ### Footnotes
 
