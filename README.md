@@ -6,6 +6,7 @@
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
 - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
 - [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
+- [Glosses](#glosses)
 - [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
@@ -248,7 +249,7 @@ Then you can use the `\gll` and `\glll` macros as usual:
 ```
 
 **Note:** As of this writing, there is a problem with diacritic marks. A workaround is described 
-[below under "Known Issues"](#diacrictics-with-cgloss4e). Alternatively, you can use 
+[below under "Known Issues"](#diacritics-with-cgloss4e). Alternatively, you can use 
 [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty), which is a hacked version of `cgloss4e` that 
 prevents the problem.
 
