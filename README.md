@@ -12,7 +12,7 @@
 - [Known issues](#known-issues)
 
 Linguists (and scholars in related fields) use example sentences in their 
-writing. There is a fairly accepted standard for format for presenting 
+writing. There is a fairly accepted standard format for presenting 
 those: Example sentences are numbered continuously throughout a document, and
 optionally can have subexamples, as in (2) below.
 
@@ -234,6 +234,24 @@ the example label as an optional argument:
 ```
 (The latter form will only work if `xparse.sty` is available. Otherwise, you can use `\ex[a-f]{imperatives}`, which will always work.)
 
+## Glosses
+
+Currently, the package does not provide its own support for aligned glosses.
+However, you can use `cgloss4e.sty` from [gb4e](https://www.ctan.org/tex-archive/macros/latex/contrib/gb4e) together with `example_sentences`.
+Then you can use the `\gll` and `\glll` macros as usual:
+```latex
+\begin{examples}
+    \item \gll Das ist kein Beispielsatz.\\
+               This is no   {example sentence}\\
+          \trans `This is not an example sentence.`
+\end{examples}
+```
+
+**Note:** As of this writing, there is a problem with diacritic marks. A workaround is described 
+[below under "Known Issues"](#diacrictics-with-cgloss4e). Alternatively, you can use 
+[Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty), which is a hacked version of `cgloss4e` that 
+prevents the problem.
+
 ## Dependencies
 
 - [enumitem](https://www.ctan.org/pkg/enumitem) is the only required dependency.
@@ -381,7 +399,7 @@ All options besides the one described above will be passed through to
 `enumitem`.
 
 ## Known issues
-### Beginning and example with [...] or (...)
+### Beginning an example with [...] or (...)
 
 Many linguists like to start their examples with a description of the 
 context, enclosed in square brackets [...] or, more rarely, parenthes (...). 
@@ -423,6 +441,22 @@ Alternatively (recommended) make sure to give all your examples a label via the
 **Note:** I consider this issue a (1.0)-release blocker (the only one, at this
 point), so any suggestions of how to overcome it are most welcome. If all else
 fails, I'll jettison the `\item{...}` crossreference syntax, so that, at least, the "standard" way to avoid the problem will work.
+
+### Diacritics with `cgloss4e`
+
+In version 0.5.0, this package does not correctly typeset diacritics when used together with `cgloss4e.sty`. The only workaround is either to use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) in place of `cgloss4e`, or to include the diacritic manually
+in the glossed sentence, like so:
+```latex
+\begin{examples}
+  \item 
+        \gll  \diacritic{*} Ungrammatisch dieser ist Satz.\\
+               {}           Ungrammatical this   is  sentence\\
+        \trans (intended) `This sentence is ungrammatical.'
+\end{examples}
+```
+With this, the diacritic will be typeset correctly (i.e., set in the
+space between example and number). I am currently working on a better way
+around this problem.
 
 ### Footnotes
 
