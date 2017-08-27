@@ -17,7 +17,21 @@
                         \end{exe}
               \end{exe}
     \end{exe}
-There are some advanced features, like concise label assignment:
+Of course, examples can be in footnotes.%
+\footnote{%
+  Examples in footnotes are numbered differently, but still can be referred
+  to via \ex{footnote-example}:
+  \begin{examples}
+      \item(footnote-example) This is an example in a footnote.
+  \end{examples}
+}\textsuperscript{,}\footnote{%
+  \begin{examples}
+      \item The footnote counter starts anew in each footnote.
+  \end{examples}
+}
+
+There are some advanced features, like concise label assignment:%
+
 \begin{exe}
     \ex(foo) This example will have the label \verb|foo|.
     \ex(bar)<\#> This example will have the label \verb|bar|, and will be marked 

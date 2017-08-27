@@ -71,7 +71,6 @@
 % These commands are used in the list definitions. They are modified
 % later, as needed.
 \newcommand{\ExSen@beforelist}{}
-\newcommand{\ExSen@afterlist}{}
 %
 % SETTING UP THE LISTS
 %
@@ -110,7 +109,6 @@
   align=left,%
   % Hooks
   before=\ExSen@beforelist,
-  after=\ExSen@afterlist,%
 }
 %
 \SetEnumitemKey{ex1defaults}{
@@ -175,7 +173,7 @@
 \SetEnumitemKey{fnex1defaults}{
   ex1spacingdefaults,%
   label={(\roman*)},%
-  ref={(\roman{fnexamplesi})},%
+  ref={\roman{fnexamplesi}},%
   resume,%
 }
 \setlist[fnexamples,1]{fnex1defaults}
@@ -195,18 +193,13 @@
 \setlist[fnexamples,3]{fnex3defaults}
 %
 % \footnotizeexamples has to be called before the first
-% example in a footnote, \unfootnotizeexamples after the
-% last.
+% example in a footnote.
 \newcommand{\footnotizeexamples}{%
   \let\textexamples\examples
   \let\endtextexamples\endexamples
   \let\examples\fnexamples
   \let\endexamples\endfnexamples
   \restartlist{fnexamples}
-}
-\newcommand{\unfootnotizeexamples}{%
-  \let\examples\textexamples
-  \let\endexamples\endtextexamples
 }
 % We patch the footnote command of the standard LaTeX packages.
 % Borrowed from linguex.sty --- this is a dirty hack, I dislike it.
@@ -215,7 +208,6 @@
 \long\def\@footnotetext#1{%
   \footnotizeexamples%
   \ExSen@footnotetext{#1}%
-  \unfootnotizeexamples%
 }
 %
 % \diacritic{}: Typsets a grammaticallity/acceptability judgment in the space
@@ -312,10 +304,6 @@
 \fi
 \if@ExSen@define@ex
     \let\ex\ExSen@exref
-    % In shortform mode, \ex will be changed to \exitem,
-    % so we have to reset it after.
-    \g@addto@macro\ExSen@afterlist{\let\ex\ExSen@exref}
-     
 \fi
 \if@ExSen@changeitem
    % \g@addto@macro is known to the practitioners of the dark arts (TeX)
@@ -325,10 +313,8 @@
    % require adding a dependency (such as etoolbox.sty), which seems
    % excessive.
    \g@addto@macro\ExSen@beforelist{%
-        % Save the CURRENT implementation of \item, in order to restore it.
-        % Note that \item may be different from \ExSen@item at this point,
-        % if a package loaded after example_sentences changed \item.
-        \let\ExSen@latexitem\item%
+        % This assignment will be LOCAL to the group, so there is no
+        % need to undo it afterwards.
         \let\item\ExSen@exitem%
     }
 \fi
