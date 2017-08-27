@@ -7,19 +7,21 @@ Semanticists and pragmaticists often need to typeset short dialogues, like this:
 With the `conversations.sty` the above can be typeset as:
 
 ```latex
-    [A country road. A tree.]
+[A country road. A tree.]
 \begin{conversation}
     \item[Estragon:] Nothing to be done.
     \item[Vladimir:] I am beginning to come round to that opinion. All my 
-        life I've tried to put it from me, saying Vladimir, be reasonable, you haven't yet tried everything. And I resumed the struggle.
+                     life I've tried to put it from me, saying Vladimir, be 
+                     reasonable, you haven't yet tried everything. And I 
+                     resumed the struggle.
 
-        So you are here again. 
+                     So you are here again. 
     \item[Estragon:] Am I? 
 \end{conversation}
 ```
 
 `conversations.sty` is a companion to `example_sentences.sty` (and distributed
-with it, but it can also be used on its own, or in conjunction with other packages for typesetting examples, like `linguex.sty` or `gb4e.sty`.
+with it), but it can also be used on its own, or in conjunction with other packages for typesetting examples, like `linguex.sty` or `gb4e.sty`.
 
 ## Installation 
 

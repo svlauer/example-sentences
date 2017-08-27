@@ -6,7 +6,7 @@
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
 - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
 - [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
-- [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`]#typesetting-dialogues-with-beginconversation--endconversation)
+- [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`](#typesetting-dialogues-with-beginconversation--endconversation)
 - [Glosses](#glosses)
 - [Dependencies](#dependencies)
 - [Customization](#customization)
@@ -220,8 +220,9 @@ Semanticists and pragmaticists often need to typeset short dialogues, like this:
 
 ![Example of a conversation](http://www.sven-lauer.net/files/examples/example-conversation.png)
 
-If you load `example_sentences` with the `conversations` option (i.e., `\usepackage[conversations]{example_sentences}`), a new environment 
-`conversations` becomes available, and the above can be typeset as:
+If you load `example_sentences` with the `conversations` option,
+a new environment  `conversations` becomes available, and the above can be 
+typeset as:
 ```latex
 \begin{examples}
     \item(godot) 
