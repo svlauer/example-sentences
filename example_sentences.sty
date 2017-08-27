@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 \ProvidesPackage{example_sentences}%
-  [2017/08/24 Linguistic example sentences v.0.5.0]
+  [2017/08/27 Linguistic example sentences ]
 %
 % Package Option: normalitem
 % Use \usepackage[normalitem]{example_sentences} to leave the original \item
@@ -84,6 +84,11 @@
 % it easier to overwrite specific settings. Since footnote examples share 
 % spacing defaults with the in-text examples, we define spacing defaults for
 % each level separately.
+%
+% All spacing defaults are adapted from the S&P version of Alan Munn's
+% gb4e-emulate.sty
+%
+
 % All lists:
 \SetEnumitemKey{exdefaults}{%
     align=left,%
@@ -93,18 +98,17 @@
 }
 \setlist[examples]{exdefaults}
 % for consistency ...
-%
+% All 
 \SetEnumitemKey{ex1spacingdefaults}{%
-  % Horizontal Spacing -- defaults should play well with label up to four
-  % digits long, plus parens
-  labelindent=0pt,%
-  leftmargin=2\parindent,%
-  labelsep=*,%
-  itemindent=0pt,%
-  labelwidth=*,%
   % vertical spacing
-  itemsep=0.5\baselineskip,%
-  topsep=0.75\baselineskip,
+  topsep=7pt plus 2pt minus 3pt,%
+  itemsep=3pt plus 2pt,%
+  % horizontal spacing
+  widest=888,%
+  leftmargin=*,%
+  % alignment
+  align=left,%
+  % Hooks
   before=\ExSen@beforelist,
   after=\ExSen@afterlist,%
 }
@@ -118,14 +122,17 @@
 \setlist[examples,1]{ex1defaults}
 %
 \SetEnumitemKey{ex2spacingdefaults}{%
-  % Horizontal spacing
-  labelindent=0pt,%
-  leftmargin=1.25\parindent,%
-  labelsep=*,%
-  itemindent=0pt,%
-  labelwidth=*,%
   % Vertical spacing
-  topsep=0.25\baselineskip%
+  topsep=1.5pt plus 1pt,%
+  itemsep=1.5pt plus 1pt,%
+  parsep=1pt plus 0.5pt minus.5pt,%
+  % Horizontal spacing
+  widest=a.,%
+  labelsep=*,%
+  itemindent=0em,
+  leftmargin=*
+  % Alignment
+  ,align=left%
 }
 \SetEnumitemKey{ex2defaults}{%
   ex2spacingdefaults,%
@@ -135,17 +142,21 @@
 \setlist[examples,2]{ex2defaults}
 %
 \SetEnumitemKey{ex3spacingdefaults}{%
-  labelindent=0pt,%
-  leftmargin=1\parindent,%
-  labelsep=*,%
-  itemindent=0pt,%
-  labelwidth=*,%
   % Vertical spacing
-  topsep=0.25\baselineskip%
+  topsep=1.5pt plus 1pt,%
+  itemsep=1.5pt plus 1pt,%
+  % Horizontal spacing
+  widest=iv.,%
+  labelsep=*,%
+  parsep=1pt plus.5pt minus.5pt,%
+  itemindent=0em,%
+  leftmargin=*,%
+  % Alignment
+  align=left,
 }
 \SetEnumitemKey{ex3defaults}{%
   ex3spacingdefaults,%
-  label={(\roman*)},%
+  label={\roman*.},%
   ref={\arabic{examplesi}\alph{examplesii}\roman{examplesiii}},%
 }
 \setlist[examples,3]{ex3defaults}
@@ -212,7 +223,7 @@
 % the \(ex)item commands, but maybe useful for the user in environments where
 % xparse is not available.
 % The definition of this command is borrowed from Alexander Holt's example.sty
-\newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.15 em}\ignorespaces}
+\newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.1 em}\ignorespaces}
 %
 % For the sticklers: Alias `examples` environment as `example`
 \let\example\examples
