@@ -469,7 +469,8 @@ This is difficult to achieve in the general case. `example_sentences.sty`
 patches the standard LaTeX footnote commands (i.e., `\footnote` and 
 `footnotetext`), for all other methods of typesetting notes, you will have 
 to ensure yourself that the command `\footnotizeexamples` is called at the 
-beginning of each note (or before the first example).
+beginning of each note (or before the first example) and `\unfootnotizeexamples` 
+is called at the  end of each footnote (or after the last example).
 
 *Note on implementation*: The example environments used in footnotes is in fact
 entirely different from the main `examples` (it is just mostly configured in 

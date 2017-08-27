@@ -193,13 +193,18 @@
 \setlist[fnexamples,3]{fnex3defaults}
 %
 % \footnotizeexamples has to be called before the first
-% example in a footnote.
+% example in a footnote, \unfootnotizeexamples after the
+% last.
 \newcommand{\footnotizeexamples}{%
   \let\textexamples\examples
   \let\endtextexamples\endexamples
   \let\examples\fnexamples
   \let\endexamples\endfnexamples
   \restartlist{fnexamples}
+}
+\newcommand{\unfootnotizeexamples}{%
+  \let\examples\textexamples
+  \let\endexamples\endtextexamples
 }
 % We patch the footnote command of the standard LaTeX packages.
 % Borrowed from linguex.sty --- this is a dirty hack, I dislike it.
@@ -208,6 +213,7 @@
 \long\def\@footnotetext#1{%
   \footnotizeexamples%
   \ExSen@footnotetext{#1}%
+  \unfootnotizeexamples%
 }
 %
 % \diacritic{}: Typsets a grammaticallity/acceptability judgment in the space
