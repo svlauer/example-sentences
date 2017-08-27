@@ -6,6 +6,7 @@
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
 - [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
 - [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
+- [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`]#typesetting-dialogues-with-beginconversation--endconversation)
 - [Glosses](#glosses)
 - [Dependencies](#dependencies)
 - [Customization](#customization)
@@ -213,6 +214,30 @@ the example label as an optional argument:
 ```
 (The latter form will only work if `xparse.sty` is available. Otherwise, you can use `\ex[a-f]{imperatives}`, which will always work.)
 
+## Typesetting dialogues with `\begin{conversation} ... \end{conversation}`
+
+Semanticists and pragmaticists often need to typeset short dialogues, like this:
+
+![Example of a conversation](http://www.sven-lauer.net/files/examples/example-conversation.png)
+
+If you load `example_sentences` with the `conversations` option (i.e., `\usepackage[conversations]{example_sentences}`), a new environment 
+`conversations` becomes available, and the above can be typeset as:
+```latex
+\begin{examples}
+    \item(godot) 
+    [A country road. A tree.]
+    \begin{conversation}
+        \item[Estragon:] Nothing to be done.
+        \item[Vladimir:] I am beginning to come round to that opinion. All my 
+        life I've tried to put it from me, saying Vladimir, be reasonable, you haven't yet tried everything. And I resumed the struggle.
+
+        So you are here again. 
+        \item[Estragon:] Am I? 
+    \end{conversation}
+\end{examples}
+```
+By default, the width of the labels is determined by the widest label. Configuration options are described in [the file README-conversations.md](README-conversations.md)
+
 ## Glosses
 
 Currently, the package does not provide its own support for aligned glosses.
@@ -244,6 +269,7 @@ prevents the problem.
   
 Both of these are available in CTAN and should be part of most 
 recent-ish TeX installations, as far as I know.
+
 ## Customization
 
 The `examples` environment is highly configurable. It is simply a clone of
@@ -438,8 +464,9 @@ This is difficult to achieve in the general case. `example_sentences.sty`
 patches the standard LaTeX footnote commands (i.e., `\footnote` and 
 `footnotetext`), for all other methods of typesetting notes, you will have 
 to ensure yourself that the command `\footnotizeexamples` is called at the 
-beginning of each note (or before the first example) and `\unfootnotizeexamples` 
-is called at the  end of each footnote (or after the last example).
+beginning of each note (or before the first example) and 
+`\unfootnotizeexamples` is called at the  end of each footnote (or after the 
+last example).
 
 *Note on implementation*: The example environments used in footnotes is in fact
 entirely different from the main `examples` (it is just mostly configured in 

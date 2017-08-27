@@ -51,6 +51,11 @@
     \PassOptionsToPackage{loadonly}{enumitem}%
 }%
 %
+% PackageOption: conversations
+%
+% Loads the (included) conversations.sty file
+\newif\if@ExSen@conversations\@ExSen@conversationsfalse
+\DeclareOption{conversations}{\@ExSen@conversationstrue}
 % All remaining options are passed on to the enumitem package. Note that this
 % you can pass [loadonly] to example_sentences to ensure that the usual environments
 % (itemize, enumerate and description) are not enhanced by enumitem (the
@@ -65,6 +70,10 @@
 % example_sentences is actually just a thin wrapper around the enumitem package
 % (plus some convenience commands)
 \RequirePackage{enumitem}
+%
+\if@ExSen@conversations
+    \RequirePackage{conversations}
+\fi
 %
 % SETTING UP INTERNAL COMMANDS
 %
@@ -325,4 +334,3 @@
     % \item ...
     \g@addto@macro\ExSen@beforelist{\let\ex\ExSen@exitem}
 \fi
-    

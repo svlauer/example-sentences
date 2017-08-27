@@ -1,0 +1,59 @@
+\documentclass{article}
+%
+\usepackage[conversations]{example_sentences}
+%
+\begin{document}
+%
+\noindent From version 0.6.0 on, \verb|example_sentences.sty| has a \verb|[conversations]| 
+option, which makes available the \verb|conversation| environment for typesetting dialogues.
+
+It is used like this:
+\begin{examples}
+    \item(godot) [A country road. A tree.]
+    \begin{conversation}
+        \item[Estragon:] Nothing to be done.
+        \item[Vladimir:] I am beginning to come round to that opinion. All my life I've tried to put it from me, saying Vladimir, be reasonable, you haven't yet tried everything. And I resumed the struggle.
+
+        So you are here again. 
+        \item[Estragon:] Am I? 
+    \end{conversation}
+\end{examples}
+
+Standardly, the longest label determines how much the text will be indented. But 
+if you have some exceptionally long items, it will often look better to set a 
+fixed label length, and have a newline after the label if it exceeds
+that length. Luckily, \verb|enumitem| provides just such a style. So you can 
+simply do this:
+\begin{examples}
+    \item \begin{conversation}[leftmargin=2cm,style=nextline]
+        \item[Question:] What would you think it is worth telling [future 
+                         generations] about the life you've lived, and the 
+                         lessons you've learned from it?
+                         
+        \item[Bertrand, Third Earl Russel:] 
+              I should like to say two things, one illectual, and one moral.
+
+              The intellectual thing I should like to say to them is this: When you
+              are studying any matter, or considering any philosophy, ask yourself only:
+              What are the facts, and what is the truth that the facts bear out. [...]
+
+              The moral thing I should wish to say to them is very simple. I shoud say: Love is wise, hatred is foolish. In this world, which is getting more and
+              more closely interconnected, we have to learn to tolerate each other. We
+              have to learn to put up with the fact that some people say things we don't
+              like. 
+
+              We can only live together in that way. And if we are to live together and 
+              not die together, we must learn a kind of charity and a kind of tolerance. 
+              Which is absolutely vital to the continuation of human life on this planet.
+                  \end{conversation}
+\end{examples}
+If you use the standard mode (where the width of the labels is calculated), and 
+you need a little extra space (to typeset a diacritic, say),
+you can manipulate the length \verb|\conversationindent|, as in:
+\begin{example}
+  \setlength{\conversationindent}{1em} % Default is 0.5em
+  \item \begin{conversation}
+        \item[Estragon:]<*> Be to nothing done.  
+    \end{conversation}  
+\end{example}
+\end{document}

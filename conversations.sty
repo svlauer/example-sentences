@@ -1,0 +1,69 @@
+\NeedsTeXFormat{LaTeX2e}%
+%
+\ProvidesPackage{conversations}%
+  [2017/08/27 Typesetting dialogues v.0.6.0]%
+%
+%
+\RequirePackage{enumitem}%
+%
+\RequirePackage{environ}%
+%
+%
+% The length \conversationindent can be used to adjust the spacing
+% between speaker label and text.
+\newlength{\conversationindent}
+% The default is 0.5em.
+\setlength{\conversationindent}{0.5em}
+% A command to set the style of conversation lists
+\newcommand{\setconversationlist}[1]{%
+    \setlist[Convers@conversation]{#1}%
+}
+%
+% We define an `internal' description list. The public environment
+% 'conversation' is a wrapper around this. This is needed to calculate
+% the width of the widest label.
+\newlist{Convers@conversation}{description}{1}
+% We provide a key for the defaults, to make it either for the user to
+% selectively override settings.
+\SetEnumitemKey{conversationdefaults}{%
+  % These settings should play nice with 
+  topsep=1.5pt plus 1pt,%
+  itemsep=1.5pt plus 1pt,%
+  parsep=1pt plus 0.5pt minus.5pt,%
+  leftmargin=\dimexpr\conversationwidest+\conversationindent,%
+  labelindent=0em,%
+  labelsep*=0em,%
+  labelwidth=\dimexpr\conversationwidest+\conversationindent,%
+  itemindent=0pt,
+  align=left,%
+  font={\normalfont\itshape},%
+   %before = {\let\descriptionlabel\Convers@makelabel},%
+}
+\setlist[Convers@conversation]{conversationdefaults}
+% We need to define the public environmnet with \NewEnviron,
+% so we can process the list twice.
+%
+% First, we define define a length macro to store the width of the widest label.
+\newlength{\conversationwidest}%
+%
+\NewEnviron{conversation}[1][]{%
+  \sbox0{%
+    % Reset to 0pt at the start of each list.
+    \global\setlength\conversationwidest{0pt}%
+    % Locally redefine \item so that we can measure each label
+    \def\item[##1]{%
+      \settowidth\@tempdima{\makelabel{##1}}%
+      % If the current label is wider than the previous ones, store
+      % this length.
+      \ifdim\@tempdima>\conversationwidest\global\setlength\conversationwidest{\@tempdima}\fi%
+    }%
+    % Typeset the body of the list and throw the result away (just
+    % to caculate the width of the lables).
+    \hbox{\BODY}%
+  }%
+  % Now that \conversationwidest holds the length of the widest item, we
+  % can typeset for real:
+  \begin{Convers@conversation}[#1]%
+  \BODY%
+  \end{Convers@conversation}%
+}
