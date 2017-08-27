@@ -169,28 +169,6 @@ This is equivalent to:
 \end{examples}
 ```
 
-### Cross-references with `\item{}`
-
-Sometimes it is convenient to give one example the same number as a previous
-one (for example, if the second example is a repetition of earlier one). I've
-never missed this functionality with `linguex.sty`, but some people seem to 
-like it. With `example_sentences`, you can do this by providing the `label`
-of the previous example in curly braces.
-
-So, a couple of pages after the previous example, you could use:
-```latex
-\begin{examples}
-    \item{harlem} If you want to go to Harlem, you have to take the A train.
-\end{examples}
-```
-And the result would be a repetition of the previous example number. In fact,
-`\item{harlem}` is just a synonym for `\item[(\ref{harlem})]`. Consequently,
-sub-example-references will work as expected.
-
-**Note:** As a reader, I find this style confusing. Often, it is better to number 
-repeated examples consecutively, and indicate that the
-example is repeated in another fashion. 
-
 ## Individual examples with `\begin{example} ... \end{example}`
 
 Some users (including me on certain days) will feel uncomfortable with the
@@ -404,44 +382,35 @@ All options besides the one described above will be passed through to
 
 Many linguists like to start their examples with a description of the 
 context, enclosed in square brackets [...] or, more rarely, parenthes (...). 
-Unfortunately, the package has some problems with this.
+This is fine, but you have to take extra care if you are using `\item` without
+any kind of argument (as you also have to do with `enumerate` lists).
 
-If you use `\item` (or `\ex`) with any kind of argument, all will be fine (and 
-dandy). Trouble strikes when you try to start an example with [...] with a bare
-`\item`, like so:
+The problem is that, in the following, `[This is a description of the context]`
+will be interpreted as the optional argument of `\item` (since LaTeX ignores 
+spaces before the first argument).
 ```latex
 \begin{examples}
   \item [This is a description of the context]\\
         This is the example.
 \end{examples}
 ```
-The problem is that LaTeX is quite aggressive in trying to find an argument for
-`\item`. So it will consider the context description an argument, and hence treat "This is a description of the context" as a manually-supplied label.
 
-What's worse, "standard" techniques for avoiding that problem won't work. These include prefixing `{}` to the context description, or wrapping the context description in curly braces: 
-`{[This is a description of the context]}`. In both cases, LaTeX will consider
-the stuff in braces as the argument of the [`\item{}`](#cross-references-with-item)-version of the `\item` command, leading to less-than-satisfactory results.
-
-At present, the only work-around is to tell LaTex to "relax" before the context
-description:
+To prevent this behavior, simply put a pair of braces around the context description:
 ```latex
 \begin{examples}
-  \item \relax [This a description of the context]\\
+  \item {[This is a description of the context]}\\
         This is the example.
 \end{examples}
 ```
+
 Alternatively (recommended) make sure to give all your examples a label via the
-[convenient `\item(...)` command](assigning-labels-with-item). Then, the above becomes:
+[convenient `\item(...)` command](assigning-labels-with-item). The following will work without problems:
 ```latex
 \begin{examples}
   \item(mylabel) [This a description of the context]\\
         This is the example.
 \end{examples}
 ```
-
-**Note:** I consider this issue a (1.0)-release blocker (the only one, at this
-point), so any suggestions of how to overcome it are most welcome. If all else
-fails, I'll jettison the `\item{...}` crossreference syntax, so that, at least, the "standard" way to avoid the problem will work.
 
 ### Diacritics with `cgloss4e`
 

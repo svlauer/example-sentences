@@ -271,22 +271,18 @@
     % loaded. This way, nothing odd will happen in case a later package changes
     % the behavior of \item
     \let\ExSen@item\item
-    \NewDocumentCommand{\ExSen@exitem}{o d() g d<>}{%
+    \NewDocumentCommand{\ExSen@exitem}{o d() d<>}{%
         \IfValueTF{#1}{%
             \ExSen@item[#1]%
         }{%
             \IfValueTF{#2}{%
                 \ExSen@item \label{#2}%
             }{%
-                \IfValueTF{#3}{%
-                    \ExSen@item[\ExSen@exref{#3}]%
-                }{
-                    \ExSen@item%
-                }
+                \ExSen@item%
             }%
         }%
-        \IfValueT{#4}{%
-            \diacritic{#4}
+        \IfValueT{#3}{%
+            \diacritic{#3}
         }%
     }
     % If xparse is available, we also enable a version of 

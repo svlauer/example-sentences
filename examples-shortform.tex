@@ -40,17 +40,16 @@ There are some advanced features, like concise label assignment:%
 %
 Now we can refer to the above examples by using \verb|\ex{foo}| and \verb|\exref{bar}|, like this: \ex{foo} and \exref{bar}.
 
-Crossreferences, are also supported. if you want to repeat an example with its original 
-number, use \verb|\ex{label}|:
-\begin{exe}
-    \ex{foo} This example will have the label `foo'.
-\end{exe}
-%
 And if you want to manually supply the example number, use \verb|\ex[(mynumber)]| (as with \verb|\item|):
 \begin{exe}
     \ex[(42)] This example is numbered 42.
 \end{exe}
 %
+This can be used to do cross-references, like this:%
+\begin{exe}
+    \ex[\exref{foo}] This example will have the label `foo'.
+\end{exe}
+
 In \verb|[shortform]| mode, all the usual commands remain available, 
 and you can mix the two freely (though maybe you should not do that):
 \begin{exe}

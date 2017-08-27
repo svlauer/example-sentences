@@ -26,18 +26,18 @@ There are some advanced features, like concise label assignment:
 %
 Now we can refer to the above examples by using \verb|\ex{foo}| and \verb|\exref{bar}|, like this: \ex{foo} and \exref{bar}.
 
-Crossreferences, are also supported. if you want to repeat an example with its original 
-number, use \verb|\item{label}|:
-\begin{examples}
-    \item{foo} This example will have the label `foo'.
-\end{examples}
-%
 And, as usual, if you want to manually supply the example number, use \verb|\item[(mynumber)]|:
 \begin{examples}
     \item[(42)] This example is numbered 42.
 \end{examples}
+
+This can be used to do cross-references, like this:
+\begin{examples}
+    \item[\ex{foo}] This example will have the label `foo'.
+\end{examples}
 %
-Finally, if you have you use a single example, you can use the singular form of the environment name:
+%
+Finally, if you have you a single example, you can use the singular form of the environment name:
 \begin{example}
     \item This is a lonely example.
 \end{example}
