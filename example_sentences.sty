@@ -47,9 +47,8 @@
 % Package Option: enumitemize
 % Standardly, example_sentences does not apply enumitem's enhancements to 
 % the standard lists. This option changes that.
-\DeclareOption{enumitemize}{%
-    \PassOptionsToPackage{loadonly}{enumitem}%
-}%
+\newif\if@ExSen@loadonly\@ExSen@loadonlytrue
+\DeclareOption{enumitemize}{\@ExSen@loadonlyfalse}
 %
 % PackageOption: conversations
 %
@@ -65,6 +64,9 @@
 %
 \ProcessOptions\relax
 % 
+\if@ExSen@loadonly
+  \PassOptionsToPackage{loadonly}{enumitem}%
+\fi
 % LOADING DEPENDENCIES
 % 
 % example_sentences is actually just a thin wrapper around the enumitem package
