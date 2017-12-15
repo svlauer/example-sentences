@@ -453,6 +453,16 @@ This means you have to manually declare any theorem-style environments that you 
 **Note:** In the next (pre-)release, this issue will likely be solved by deprecating the [`example`-alias of the `examples`-environment](#individual-examples-with-beginexample--endexample).
 
 (Thanks to Shane Steinert-Threlkeld for pointing out this issue, and the current work-around.)
+### Overlays with `beamer`
+Even with the `notheorems` option, there currently is an issue with overlay
+specifications: Since overlays cause a `frame` to be typeset more than once,
+example number will be increased with each overlay.
+
+The only work-arounds at present are (i) avoiding overlays or (ii) specifying manual labels via `\item[(label)]`.
+
+This problem will likele be fixed in the next release by making `example_sentences` overlay-aware.
+
+(Thanks to Shane Steinert-Threlkeld for pointing out this issue.)
 ### Diacritics with `cgloss4e`
 
 In version 0.5.0, this package does not correctly typeset diacritics when used together with `cgloss4e.sty`. The only workaround is either to use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) in place of `cgloss4e`, or to include the diacritic manually
