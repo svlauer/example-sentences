@@ -465,7 +465,7 @@ example number will be increased with each overlay.
 
 The only work-arounds at present are (i) avoiding overlays or (ii) specifying manual labels via `\item[(label)]`.
 
-This problem will likele be fixed in the next release by making `example_sentences` overlay-aware.
+This problem will likely be fixed in the next release by making `example_sentences` overlay-aware.
 
 (Thanks to Shane Steinert-Threlkeld for pointing out this issue.)
 ### Diacritics with `cgloss4e`
