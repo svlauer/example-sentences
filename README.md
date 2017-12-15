@@ -41,7 +41,8 @@ While
 has a concise syntax that is very readable (which is why I favored it for a 
 long time), it betrays its TeX roots through various quirks. For example, it 
 has very  particular whitespace requirements, which can make working with it a 
-hassle. The same true for [expex.sty](https://www.ctan.org/pkg/expex?lang=en), 
+hassle. The same is true for 
+[expex.sty](https://www.ctan.org/pkg/expex?lang=en), 
 which also features a rather exotic syntax that I've always found too difficult to remember. And then there is 
 [gb4e.sty](https://www.ctan.org/pkg/gb4e?lang=en), which is more LaTeXy then 
 the other ones, but which has a number of strange inconsistencies.
@@ -328,7 +329,7 @@ So the initial example can then be rewritten as:
 \end{exe}
 ```
 `\ex` supports all the niceties of the `\item` command (provided `xparse` is
-available), so all of `\ex<*>`, `\ex(label)<\#>`, `\ex{label}<?>` and 
+available), so all of `\ex<*>`, `\ex(label)<\#>`,  and 
 `\ex[(2)]<*>` are valid.
 
 For obvious reasons, the reference convenience command `\ex` will not be 
@@ -439,6 +440,19 @@ Alternatively (recommended) make sure to give all your examples a label via the
 \end{examples}
 ```
 
+### Compatibility with `beamer.sty`
+
+As of version 0.6.0, there is an issue with using `example_sentences` together with the `beamer` package. The problem is that `beamer` defines an `example`-environment, which clashes with `example_environment`.
+
+A workaround is to load `beamer` with the `notheorems`-option, like so:
+```latex
+\documentclass[notheorems]{beamer}
+```
+This means you have to manually declare any theorem-style environments that you want to use. However, according to the `beamer` documentation, the package will still apply its enhancements (e.g., boxes) to such manually-defined environments.
+
+**Note:** In the next (pre-)release, this issue will likely be solved by deprecating the [`example`-alias of the `examples`-environment](#individual-examples-with-beginexample--endexample).
+
+(Thanks to Shane Steinert-Threlkeld for pointing out this issue.)
 ### Diacritics with `cgloss4e`
 
 In version 0.5.0, this package does not correctly typeset diacritics when used together with `cgloss4e.sty`. The only workaround is either to use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) in place of `cgloss4e`, or to include the diacritic manually
