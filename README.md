@@ -12,6 +12,11 @@
 - [Customization](#customization)
 - [Package Options](#package-options)
 - [Known issues](#known-issues)
+  + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
+  + [Compatibility with `beamer`](#compatibility-with-beamer)
+  + [Overlays with `beamer`](#overlays-with-beamer)
+  + [Diacritics with `cgloss4e`](#diacritics-with-cgloss4e)
+  + [Footnotes](#footnotes)
 
 Linguists (and scholars in related fields) use example sentences in their 
 writing. There is a fairly accepted standard format for presenting 
