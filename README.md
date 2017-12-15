@@ -442,7 +442,7 @@ Alternatively (recommended) make sure to give all your examples a label via the
 
 ### Compatibility with `beamer`
 
-As of version 0.6.0, there is an issue with using `example_sentences` together with the `beamer` package. The problem is that `beamer` defines an `example`-environment, which clashes with `example_environment`.
+As of version 0.6.0, there is an issue with using `example_sentences` together with the `beamer` package. The problem is that `beamer` defines an `example`-environment, which clashes with `example_sentences`.
 
 A work-around is to load `beamer` with the `notheorems`-option, like so:
 ```latex
