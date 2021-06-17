@@ -75,7 +75,7 @@ There are a number of [package options](#package-options), described below.
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you already
-know how to use `example_sentences`. All that changes for basic usage is that
+know how to use `example_sentences`. All that changes is that
 you use the `examples` environment instead of `enumerate`:
 
 ```latex
@@ -136,9 +136,8 @@ you should use (if possible) the convenience macros described below.
 
 ## Syntactic sugar: Some enhancements for `\item`
 
-If you have `xparse.sty` available, which is contained in 
-[l3packages](https://www.ctan.org/pkg/l3packages), a number of enhancements
-of the basic `\item` command are available.
+A number of enhancements of the basic `\item` command are available, unless your LaTeX installation is truly ancient. (You need to have `xparse.sty` available, which is contained in 
+[l3packages](https://www.ctan.org/pkg/l3packages), and should be contained in most recent-ish LaTeX-Installations).
 
 ### Diacritics with `\item<>`
 
