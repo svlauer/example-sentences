@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage[notheorems]{beamerarticle}
+\usepackage{../../../example_sentences}
+
+\title{Loading \texttt{beamerarticle} before \texttt{example\_sentences} with the \texttt{notheorems}-option}
+\date{}
+\author{}
+\begin{document}
+	\maketitle
+	\begin{frame}
+		\frametitle{A beamer frame}
+		\begin{example}
+			\item(single) This is an \texttt{example\_sentences} example. It is typeset the normal way.
+		\end{example}
+		\begin{examples}
+		 	 \item(multiple-first) This is another example.
+		 	 \item(multiple-second) And another one, also typeset the normal way.
+		\end{examples}
+	\end{frame}
+    
+    \paragraph{Note} If \texttt{beamerarticle.sty} is loaded with the \texttt{notheorems} option, the \texttt{beamerexamples}-environment will not be available unless you define it yourself with the
+    \verb|\newtheorem| command.
+
+\end{document}

@@ -3,6 +3,8 @@
 \ProvidesPackage{example_sentences}%
   [2017/08/27 Linguistic example sentences v.0.6.0]
 %
+% OPTION PROCESSING
+%
 % Package Option: normalitem
 % Use \usepackage[normalitem]{example_sentences} to leave the original \item
 % command unchanged. You can then use \exitem instead for advanced behavior
@@ -77,6 +79,15 @@
     \RequirePackage{conversations}
 \fi
 %
+% DETECT BEAMER
+%
+\newif\if@ExSen@beamer\@ExSen@beamerfalse
+% Is the beamer class loaded?
+\@ifclassloaded{beamer}{\@ExSen@beamertrue}{}
+% Else, has beamerartlice.sty been loaded?
+\@ifpackageloaded{beamerarticle}{\@ExSen@beamertrue}{}
+%
+%
 % SETTING UP INTERNAL COMMANDS
 %
 % These commands are used in the list definitions. They are modified
@@ -85,8 +96,24 @@
 %
 % SETTING UP THE LISTS
 %
-% Define example lists as a clone fo enumerate. 
-\newlist{examples}{enumerate}{3}
+\if@ExSen@beamer
+    \@ifundefined{examples}
+    {
+        \newlist{examples}{enumerate}{3}
+    }
+    {
+        % Define example lists as a clone fo enumerate. 
+        \let\beamerexamples\examples
+        \let\endbeamerexamples\endexamples
+        % Alias beamer's example-environment as beamerexample
+        \let\beamerexample\example
+        \let\endbeamerexample\endexample
+        % Overwrite beamer's environments
+        \renewlist{examples}{enumerate}{3}
+    }
+\else
+    \newlist{examples}{enumerate}{3}
+\fi
 %
 % CONFIGURING THE LISTS
 % 

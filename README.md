@@ -1,6 +1,5 @@
 # The `example_sentences.sty` package for typesetting linguistic examples
 
-
 - [Installation](#installation)
 - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
@@ -11,6 +10,7 @@
 - [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
+- 
 - [Known issues](#known-issues)
   + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
   + [Compatibility with `beamer`](#compatibility-with-beamer)
@@ -410,6 +410,40 @@ If you want to change this, pass the `enumitemize` option to
 All options besides the one described above will be passed through to 
 `enumitem`.
 
+### Compatibility with `beamer`
+
+`beamer` is a powerful package for typesetting slide-style presentations. As is the case with many packages, a few things have to be kept in mind when using `example_sentences` with `beamer`.
+
+#### `beamer`'s `example(s)`-environment
+
+By default, `beamer` defines two environments called `example` and `examples`, which typeset their contents in a block with the heading "Example(s)". `example_sentences` **overwrites** these environments.
+
+To use the beamer-style example-environments when `example_sentences` is loaded,  you can use the aliases `beamerexample` and `beamerexamples`:
+
+```latex
+\begin{beamerexamples}
+  This is a example in the beamer-style.
+\end{beamerexamples}
+```
+
+#### Using `beamerarticle.sty`
+
+`beamer` provides a style-file `beamerarticle.sty`, which enables the use 
+of various beamer commands in documents that are typeset with other document 
+classes, like `article`. This makes it easier to share code between beamer slides
+and an article or handout.
+
+To make sure that `example_sentences` plays nicely with `beamerarticle.sty`, you have
+two options:
+
+1. (recommended) Load `beamerarticle.sty` **before** `example_sentences.sty`. Then everything will 
+    work as usual.
+2. Load `beamerarticle.sty` with the `notheorems` option, like so: 
+   `\usepackage[notheorems]{beamerarticle}`.
+
+   This means you have to manually declare any theorem-style environments that you want to use. However, `beamer` will still apply its enhancements (e.g., boxes) to such manually-defined environments.
+
+
 ## Known issues
 ### Beginning an example with [...] or (...)
 
@@ -445,29 +479,18 @@ Alternatively (recommended) make sure to give all your examples a label via the
 \end{examples}
 ```
 
-### Compatibility with `beamer`
-
-As of version 0.6.0, there is an issue with using `example_sentences` together with the `beamer` package. The problem is that `beamer` defines an `example`-environment, which clashes with `example_sentences`.
-
-A work-around is to load `beamer` with the `notheorems`-option, like so:
-```latex
-\documentclass[notheorems]{beamer}
-```
-This means you have to manually declare any theorem-style environments that you want to use. However, according to the `beamer` documentation, the package will still apply its enhancements (e.g., boxes) to such manually-defined environments.
-
-**Note:** In the next (pre-)release, this issue will likely be solved by deprecating the [`example`-alias of the `examples`-environment](#individual-examples-with-beginexample--endexample).
-
-(Thanks to Shane Steinert-Threlkeld for pointing out this issue, and the current work-around.)
 ### Overlays with `beamer`
-Even with the `notheorems` option, there currently is an issue with overlay
-specifications: Since overlays cause a `frame` to be typeset more than once,
-example number will be increased with each overlay.
+There currently is an issue with overlay
+specifications in the `beamer` package: Since overlays cause a `frame` to be typeset more than once,
+example numbers will be increased with each overlay.
 
 The only work-arounds at present are (i) avoiding overlays or (ii) specifying manual labels via `\item[(label)]`.
 
 This problem will likely be fixed in the next release by making `example_sentences` overlay-aware.
 
 (Thanks to Shane Steinert-Threlkeld for pointing out this issue.)
+
+
 ### Diacritics with `cgloss4e`
 
 In version 0.5.0, this package does not correctly typeset diacritics when used together with `cgloss4e.sty`. The only workaround is either to use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) in place of `cgloss4e`, or to include the diacritic manually

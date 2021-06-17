@@ -1,0 +1,19 @@
+\documentclass[notheorems]{beamer}
+\usepackage{../../../example_sentences}
+
+\begin{document}
+	\begin{frame}
+		\frametitle{Using the \texttt{beamer} class with the \texttt{example\_sentences} package and the \texttt{notheorems}-option}
+		\begin{example}
+			\item(single) This is an \texttt{example\_sentences} example. It is typeset the normal way.
+		\end{example}
+		\begin{examples}
+		 	 \item(multiple-first) This is another example.
+		 	 \item(multiple-second) And another one, also typeset the normal way.
+		\end{examples}
+		\begin{block}{Note}
+			If the \texttt{beamer} class is loaded with the \texttt{notheorems} option, the \texttt{beamerexamples}-environment will not be available unless you define it yourself with the
+    \texttt{\textbackslash{}newtheorem} command.
+		\end{block} 
+	\end{frame}
+\end{document}
