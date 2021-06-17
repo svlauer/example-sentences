@@ -1,23 +1,5 @@
 # The `example_sentences.sty` package for typesetting linguistic examples
 
-- [Installation](#installation)
-- [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
-- [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
-- [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
-- [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
-- [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`](#typesetting-dialogues-with-beginconversation--endconversation)
-- [Glosses](#glosses)
-- [Dependencies](#dependencies)
-- [Customization](#customization)
-- [Package Options](#package-options)
-- [Compatibility with `beamer`](#compatibility-with-beamer)
-  + [`beamer`'s example(s)-environment](#beamers-examples-environment)
-  + [Using `beamerarticle.sty`](#using-beamerarticlesty)
-- [Known issues](#known-issues)
-  + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
-  + [Overlays with `beamer`](#overlays-with-beamer)
-  + [Diacritics with `cgloss4e`](#diacritics-with-cgloss4e)
-  + [Footnotes](#footnotes)
 
 Linguists (and scholars in related fields) use example sentences in their 
 writing. There is a fairly accepted standard format for presenting 
@@ -57,6 +39,25 @@ There is an old style file called `examples.sty` (written by Alexander Holt at
 the University of Edinburgh) floating around that provides something closer to 
 the ideal, but it has a number of features that I disliked, so I decided to 
 create my own.
+
+- [Installation](#installation)
+- [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
+- [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
+- [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
+- [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
+- [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`](#typesetting-dialogues-with-beginconversation--endconversation)
+- [Glosses](#glosses)
+- [Dependencies](#dependencies)
+- [Customization](#customization)
+- [Package Options](#package-options)
+- [Compatibility with `beamer`](#compatibility-with-beamer)
+  + [`beamer`'s example(s)-environment](#beamers-examples-environment)
+  + [Using `beamerarticle.sty`](#using-beamerarticlesty)
+- [Known issues](#known-issues)
+  + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
+  + [Overlays with `beamer`](#overlays-with-beamer)
+  + [Diacritics with `cgloss4e`](#diacritics-with-cgloss4e)
+  + [Footnotes](#footnotes)
 
 ## Installation
 
