@@ -1,5 +1,9 @@
 # Changelog
 
+## Dev version
+
+- **2021-06-17**: Fixed [Issue #2: Clash of environment names](https://github.com/svlauer/example_sentences/issues/2) (Beamer compatibility)
+
 ## 2017-08-27: Release 0.6.0
 
 - **2017-08-27**: Added `conversations.sty`, which provides in environment
