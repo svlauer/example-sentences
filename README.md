@@ -10,10 +10,11 @@
 - [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
-- 
+- [Compatibility with `beamer`](compatibility-with-beamer)
+  + [`beamer`'s example(s)-environment'](beamers-examples-environment)
+  + [Using `beamerarticle.sty`](using-beamerarticlesty)
 - [Known issues](#known-issues)
   + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
-  + [Compatibility with `beamer`](#compatibility-with-beamer)
   + [Overlays with `beamer`](#overlays-with-beamer)
   + [Diacritics with `cgloss4e`](#diacritics-with-cgloss4e)
   + [Footnotes](#footnotes)
@@ -410,11 +411,11 @@ If you want to change this, pass the `enumitemize` option to
 All options besides the one described above will be passed through to 
 `enumitem`.
 
-### Compatibility with `beamer`
+## Compatibility with `beamer`
 
 `beamer` is a powerful package for typesetting slide-style presentations. As is the case with many packages, a few things have to be kept in mind when using `example_sentences` with `beamer`.
 
-#### `beamer`'s `example(s)`-environment
+### `beamer`'s `example(s)`-environment
 
 By default, `beamer` defines two environments called `example` and `examples`, which typeset their contents in a block with the heading "Example(s)". `example_sentences` **overwrites** these environments.
 
@@ -426,7 +427,7 @@ To use the beamer-style example-environments when `example_sentences` is loaded,
 \end{beamerexamples}
 ```
 
-#### Using `beamerarticle.sty`
+### Using `beamerarticle.sty`
 
 `beamer` provides a style-file `beamerarticle.sty`, which enables the use 
 of various beamer commands in documents that are typeset with other document 
