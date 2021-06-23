@@ -11,7 +11,7 @@ a document, and optionally can have subexamples, as in (2) below.
 The platonic ideal of a LaTeX package for typesetting such examples 
 would provide an environment that behaves as much as possible as LaTeX's
 built-in `enumerate` lists (because, at heart, example lists *are* just
-ordered lists). So the above examples would be typeset as:
+ordered lists). So the above examples should be typeset as:
 
 ```latex
 \begin{examples}
@@ -23,40 +23,37 @@ ordered lists). So the above examples would be typeset as:
 \end{examples}
 ```
 
-The existing packages that I know of fall short of this ideal in several 
-ways. 
-While [linguex.sty](https://www.ctan.org/tex-archive/macros/latex/contrib/linguex?lang=en)
-has a concise syntax that is very readable (which is why I favored it 
-for a long time), it betrays its TeX roots through various quirks. For 
-example, it has very  particular whitespace requirements, which can make
-working with it a hassle. The same is true for 
-[expex.sty](https://www.ctan.org/pkg/expex?lang=en), 
-which also features a rather exotic syntax that I've always found too 
-difficult to remember. And then there is 
-[gb4e.sty](https://www.ctan.org/pkg/gb4e?lang=en), which is more LaTeXy
-than the other ones, but which has a number of strange inconsistencies.
+The existing packages fall short of this ideal in several ways: 
 
-There is an old style file called `examples.sty` (written by Alexander 
-Holt at the University of Edinburgh) floating around that provides 
-something closer to the ideal, but it has a number of features that I 
-disliked, so I decided to create my own.
+- [linguex](https://www.ctan.org/tex-archive/macros/latex/contrib/linguex?lang=en)
+  has a concise WYSIWYGish syntax that is very readable (which is why I favored it 
+  for a long time), but it betrays its TeX roots through various quirks. For 
+  example, it has very  particular whitespace requirements, which can make
+  working with it a hassle.
+- The same is true for [expex](https://www.ctan.org/pkg/expex?lang=en), 
+  which also features a rather exotic syntax that I've always found too 
+  difficult to remember. 
+- [gb4e.sty](https://www.ctan.org/pkg/gb4e?lang=en) is more LaTeXy
+  than the other ones, but it has a number of strange inconsistencies.
+  
+As I was dissatisfied with this state of affairs, I decided to write my own package.
+
+## Table of contents
 
 - [Installation](#installation)
 - [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
 - [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
-- [Individual examples with `\begin{example} ... \end{example}`](#individual-examples-with-beginexample--endexample)
 - [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
 - [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`](#typesetting-dialogues-with-beginconversation--endconversation)
 - [Glosses](#glosses)
-- [Dependencies](#dependencies)
 - [Customization](#customization)
 - [Package Options](#package-options)
+- [Dependencies](#dependencies)
 - [Compatibility with `beamer`](#compatibility-with-beamer)
-  + [`beamer`'s example(s)-environment](#beamers-examples-environment)
+  + [`beamer`'s examples-environment](#beamers-examples-environment)
   + [Using `beamerarticle.sty`](#using-beamerarticlesty)
 - [Known issues](#known-issues)
   + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
-  + [Overlays with `beamer`](#overlays-with-beamer)
   + [Diacritics with `cgloss4e`](#diacritics-with-cgloss4e)
   + [Footnotes](#footnotes)
 
@@ -66,7 +63,7 @@ As usual, simply place `example_sentences.sty` some place where TeX can
 find it (the directory where your tex files live will work if all else 
 fails).
 
-Then you can load in the usual way, by placing the following in the 
+Then you can load it in the usual way, by placing the following in the 
 preamble of your document:
 ```latex
 \usepackage{example_sentences}
@@ -78,8 +75,7 @@ below.
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you 
-already know how to use `example_sentences`. All that changes is that
-you use the `examples` environment instead of `enumerate`:
+already know how to use `example_sentences`:
 
 ```latex
 \begin{examples}
@@ -121,7 +117,7 @@ the original example number):
 ```
 
 In fact, this is almost all you need to know in order to produce 
-anything that `example_sentences` can produce. The only additional thing
+everyting that `example_sentences` can produce. The only additional thing
 to know is how to typeset diacritic marks indicating acceptability and 
 such. You can do this explicitly by using the `\diacritic{}` command:
 ```latex
@@ -140,14 +136,11 @@ Instead, you should use the convenience macros described below.
 ## Syntactic sugar: Some enhancements for `\item`
 
 A number of enhancements of the basic `\item` command are available, 
-unless your LaTeX installation is truly ancient. (You need to have 
-`xparse.sty` available, which is contained in 
-[l3packages](https://www.ctan.org/pkg/l3packages), and should be 
-contained in most recent-ish LaTeX-Installations).
+unless your LaTeX installation is truly ancient. 
 
 ### Diacritics with `\item<>`
 
-All variants of `\item` (including the ones described below) allow for 
+All variants of `\item` allow for 
 an optional argument in angle brackets containing a 
 diacritic/acceptability mark:
 
@@ -161,13 +154,7 @@ This renders as
 
 ![Example with diacritic](http://www.sven-lauer.net/files/examples/diacritic-example.png)
 
-If available, this style is preferred over the explicit use of 
-`\diacritic{}`.
-
-**Note:** Writing this documentation, it occurs to me that this style 
-will likely wreak havoc when `example_sentences` is used with the 
-`beamer` package to produce slide shows. So there is a chance this will 
-change in the future.
+This style is preferred over the explicit use of `\diacritic{}`.
 
 ### Assigning labels with `\item()`
 
@@ -187,22 +174,8 @@ This is equivalent to:
                         the A train.
 \end{examples}
 ```
-
-## Individual examples with `\begin{example} ... \end{example}`
-
-Some users (including me on certain days) will feel uncomfortable with 
-the environment name `examples` in case there is only one `\item`. For 
-those users, there is a synonym `example`, so you can write:
-```latex
-\begin{example}
-    \item This is an example.
-\end{example}
-```
-(You will still have to type `\item`, though. This may change in future 
-releases.)
-
-This is a true alias of the `examples` environment, so nothing prevents 
-multiple examples in an `example` environment.
+Of course, this style can be used with diacritics, `\item(labelname)<*>` is valid and 
+produces the expected result. The same is true for `\item[exnumber]<*>`.
 
 ## Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`
 
@@ -218,14 +191,14 @@ range of sub-examples, as in:
 ```latex
 (\ref{imperatives}a-f) show the varied uses of imperatives.
 ```
-However, the package provides two handy shortcut for example references. 
+However, the package provides two handy shortcuts for example references. 
 Instead of writing `(\ref{harlem})`, you can simply write either:
 ```latex
-The sentence in \exref{harlem} is curious in that ...
+The sentence in \ex{harlem} is curious in that ...
 ```
 or:
 ```latex
-The sentence in \ex{harlem} is curious in that ...
+The sentence in \exref{harlem} is curious in that ...
 ```
 
 And, as an added nicety, you can provide arbitrary material that is 
@@ -233,9 +206,6 @@ appended to the example label as an optional argument:
 ```latex
 \ex{imperatives}[a-f] show the varied uses of imperatives.
 ```
-(The latter form will only work if `xparse.sty` is available. Otherwise, 
-you can use `\ex[a-f]{imperatives}`, which will always work.)
-
 ## Typesetting dialogues with `\begin{conversation} ... \end{conversation}`
 
 Semanticists and pragmaticists often need to typeset short dialogues, 
@@ -260,7 +230,6 @@ typeset as:
     \end{conversation}
 \end{examples}
 ```
-By default, the width of the labels is determined by the widest label. 
 Configuration options are described in 
 [the file README-conversations.md](README-conversations.md)
 
@@ -284,21 +253,6 @@ A workaround is described
 you can use 
 [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty), 
 which is a hacked version of `cgloss4e` that prevents the problem.
-
-## Dependencies
-
-- [enumitem](https://www.ctan.org/pkg/enumitem) is the only required 
-   dependency.
-
-  (In fact, the main part of `example_sentences` is just a paper-thin wrapper 
-  around `enumitem`'s functionality.]
-- The `xparse` package (available as part of
-  [l3packages](https://www.ctan.org/pkg/l3packages)) is not required, 
-  but if it is present, it is used to provide some nice syntactic sugar 
-  for the `\item` commands.
-  
-Both of these are available in CTAN and should be part of most 
-recent-ish TeX installations, as far as I know.
 
 ## Customization
 
@@ -443,21 +397,34 @@ If you want to change this, pass the `enumitemize` option to
 All options besides the one described above will be passed through to 
 `enumitem`.
 
+## Dependencies
+
+Unless you (La)TeX installation is truly ancient, you should be able to
+use `example_sentences` without further ado. For the record, here is a
+list of the required packages:
+
+- [enumitem](https://www.ctan.org/pkg/enumitem) is the only required 
+   dependency.
+- The `xparse` package (available as part of
+  [l3packages](https://www.ctan.org/pkg/l3packages)) is not strictly
+  required, but the 
+  [enhancements for the `\item` command described above](#syntactic-sugar-some-enhancements-for-item)
+  will only be available if `xparse` is present in your LaTeX-installation.
+
 ## Compatibility with `beamer`
 
 `beamer` is a powerful package for typesetting slide-style 
 presentations. As is the case with many packages, a few things have to 
 be kept in mind when using `example_sentences` with `beamer`.
 
-### `beamer`'s `example(s)`-environment
+### `beamer`'s `examples`-environment
 
-By default, `beamer` defines two environments called `example` and 
-`examples`, which typeset their contents in a block with the heading 
-"Example(s)". `example_sentences` **overwrites** these environments.
+By default, `beamer` defines an environment called `examples` and, 
+which typeset their contents in a `block` with the heading 
+"Examples". `example_sentences` **overwrites** this environment.
 
-To use the beamer-style example-environments when `example_sentences` 
-is loaded,  you can use the aliases `beamerexample` and 
-`beamerexamples`:
+To use the beamer-style `examples`-environment when `example_sentences` 
+is loaded,  you can use the alias `beamerexamples`:
 
 ```latex
 \begin{beamerexamples}
@@ -488,11 +455,11 @@ To make sure that `example_sentences` plays nicely with
 ## Known issues
 ### Beginning an example with [...] or (...)
 
-Many linguists like to start their examples with a description of the 
-context, enclosed in square brackets [...] or, more rarely, parenthes 
-(...).  This is fine, but you have to take extra care if you are using 
-`\item` without any kind of argument (as you also have to do with 
-`enumerate` lists).
+Many linguists (semanticists and pragmaticists in particular) like to 
+start their examples with a description of the context, enclosed in 
+square brackets [...] or, more rarely, parenthes (...).  This is fine, 
+but you have to take extra care if you are using `\item` without any 
+kind of argument (as you also have to do with `enumerate` lists).
 
 The problem is that, in the following, 
 `[This is a description of the context]` will be interpreted as the 
@@ -505,17 +472,9 @@ first argument).
 \end{examples}
 ```
 
-To prevent this behavior, simply put a pair of braces around the context
-description:
-```latex
-\begin{examples}
-  \item {[This is a description of the context]}\\
-        This is the example.
-\end{examples}
-```
-
-Alternatively (recommended) make sure to give all your examples a label 
-via the [convenient `\item(...)` command](assigning-labels-with-item). 
+The recommendes way to avoid this problem is to give all your examples
+a label via the 
+[convenient `\item(...)` command](assigning-labels-with-item).
 The following will work without problems:
 ```latex
 \begin{examples}
@@ -524,27 +483,23 @@ The following will work without problems:
 \end{examples}
 ```
 
-### Overlays with `beamer`
-There currently is an issue with overlay
-specifications in the `beamer` package: Since overlays cause a `frame` 
-to be typeset more than once, example numbers will be increased with 
-each overlay.
-
-The only work-arounds at present are (i) avoiding overlays or (ii) 
-specifying manual labels via `\item[(label)]`.
-
-This problem will likely be fixed in the next release by making 
-`example_sentences` overlay-aware.
-
-(Thanks to Shane Steinert-Threlkeld for pointing out this issue.)
-
-
+Alternatively, simply put a pair of braces around the context
+description:
+```latex
+\begin{examples}
+  \item {[This is a description of the context]}\\
+        This is the example.
+\end{examples}
+```
 ### Diacritics with `cgloss4e`
 
-In version 0.5.0, this package does not correctly typeset diacritics 
-when used together with `cgloss4e.sty`. The only workaround is either to
-use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) in place of `cgloss4e`, or to include the diacritic manually
-in the glossed sentence, like so:
+As of this writing, `example_sentences` does not correctly typeset 
+diacritics when used together with `cgloss4e.sty`. The best
+workaround is to use
+use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) 
+in place of `cgloss4e`.
+
+Alternatively, include the diacritic manually in the glossed sentence, like so:
 ```latex
 \begin{examples}
   \item 
