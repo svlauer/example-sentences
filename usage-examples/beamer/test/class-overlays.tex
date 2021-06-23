@@ -1,0 +1,49 @@
+\documentclass[notheorems]{beamer}
+\usepackage{example_sentences}
+
+\begin{document}
+	\begin{frame}
+		\frametitle{Using \texttt{beamer}'s overlays with the \texttt{example\_sentences} package}
+		\begin{examples}
+			\item(first) This example should have the number (1).
+		\end{examples}
+
+	\end{frame}
+	\begin{frame}
+		\frametitle{Using \texttt{beamer}'s overlays with the \texttt{example\_sentences} package (cont'd)}
+		\begin{examples}
+			\item(single) This example should have the number (2).
+		\end{examples}
+		\pause
+		\begin{examples}
+		 	 \item(multiple-first) This example should have the number (3).
+		 	 \item(multiple-second) This example should have the number (4).
+		\end{examples}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Using \texttt{beamer}'s overlays with the \texttt{example\_sentences} package (cont'd)}
+		
+		\begin{examples}
+		 	 \item This example should have the number (5).
+		 	 \pause
+		 	 \item This example should have the number (6).
+		 	 \pause
+		 	 \item This example should have the number (7).
+		\end{examples}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Using \texttt{beamer}'s overlays with the \texttt{example\_sentences} package (cont'd)}
+		
+		\begin{examples}
+		 	 
+		 	 \item This example should have the number (8).
+		 	 \onslide<3->{
+		 	 \item This example should have the number (9).
+		 	 }
+		 	 \onslide<2->{
+		 	 \item This example should have the number (10).
+		 	 }
+		\end{examples}
+	\end{frame}
+\end{document}

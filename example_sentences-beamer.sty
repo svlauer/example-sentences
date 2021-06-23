@@ -1,0 +1,85 @@
+% This style file is loaded automatically when `example_sentences` is 
+% used with `beamer`. 
+%
+% Note that this file assumes that beamer is already loaded, it does not 
+% check for this itself.
+%
+% There will be very few instances where it makes sense to load this 
+% file directly.
+%
+\ProvidesPackage{example_sentences-beamer}[%
+    2021/06/22 Linguistic example sentences v.0.8.0 
+    / beamer compatibility layer%
+]
+%
+% BEAMER HELPER COMMANDS
+%
+% Beamer unfortunately does not provide ways to execute code at the 
+% beginning of each frame or overlay. We define such commands here, as 
+% they are needed for the counter-management below.
+%
+% \ExSen@beamer@BeforeBeginFrame executes its argument at (just before) 
+% the beginning of each frame environment.
+\newcommand{%
+    \ExSen@beamer@BeforeBeginFrame%
+}[1]{%
+    \BeforeBeginEnvironment{frame}{#1}%
+}
+%
+% \ExSen@beamer@AtBeginSlide executes its argument at the beginning of 
+% each "slide" - a single frame can correspond to multiple "slides" if 
+% overlays are used. In this case, the argument of the command will be 
+% executed at the beginning of each overlay.
+%
+% (Implementation note: We prepend the argument to 
+% \beamer@checkframetitle,  which is a macro without arguments that 
+% happens to be called just before the beginning of each slide. This is 
+% decidedly hacky and relies on beamer internals, but it seems to be the
+% only way to make this work at present.)
+\newcommand{%
+  \ExSen@beamer@AtBeginSlide%
+}[1]{%
+  \preto{\beamer@checkframetitle}{#1}%
+}
+
+% DEPENDENCIES
+\RequirePackage{etoolbox}
+%
+% (RE)DEFINE THE EXAMPLES environment
+%
+% By default, beamer defines an `examples`-environment, which we alias 
+% as `beamerexamples` and then overwrite.
+%
+% However, beamer can be prevented from creating this environment (via
+% the `notheorems` option), so we must test whether the environments 
+% exist.
+% 
+\ifdef{\examples}{
+    % Alias beamer's examples environment
+    \let\beamerexamples\examples
+    \let\endbeamerexamples\endexamples
+    % Overwrite beamer's examples environment
+    \renewlist{examples}{enumerate}{3}
+}{
+    \newlist{examples}{enumerate}{3}
+}
+\@ifclassloaded{beamer}{
+    % Counter/overlay handling
+    %
+    % When overlays are used, a frame can be typeset multiple times. This 
+    % means that the example counter needs to be reset at the beginnging of
+    % each overlay (to the value it had at the beginnging of the frame).
+    %
+    % To complicate matters, enumitem actually does not save the value in 
+    % a global counter, but defines the command `\enit@resume@series@examples` which 
+    % is used to initialize the local counter of the next examples-environment.
+    % This means we cannot rely on beamer's facilities to handle global counters
+    % with overlays (\resetcounteronoverlay).
+    %
+    % Instead, we squirrel away the current value of the resume command at the
+    % beginning of each frame:
+    \ExSen@beamer@BeforeBeginFrame{\let\ExSen@beamer@resumecommand\enit@resume@series@examples}%
+    %
+    % Then, we reset the resume command at the beginning of each slide (=overlay):
+    \ExSen@beamer@AtBeginSlide{\let\enit@resume@series@examples\ExSen@beamer@resumecommand}%
+}{}

@@ -79,14 +79,12 @@
     \RequirePackage{conversations}
 \fi
 %
-% DETECT BEAMER
+% DETECTING BEAMER
+
 %
 \newif\if@ExSen@beamer\@ExSen@beamerfalse
-% Is the beamer class loaded?
 \@ifclassloaded{beamer}{\@ExSen@beamertrue}{}
-% Else, has beamerartlice.sty been loaded?
 \@ifpackageloaded{beamerarticle}{\@ExSen@beamertrue}{}
-%
 %
 % SETTING UP INTERNAL COMMANDS
 %
@@ -97,20 +95,9 @@
 % SETTING UP THE LISTS
 %
 \if@ExSen@beamer
-    \@ifundefined{examples}
-    {
-        \newlist{examples}{enumerate}{3}
-    }
-    {
-        % Define example lists as a clone fo enumerate. 
-        \let\beamerexamples\examples
-        \let\endbeamerexamples\endexamples
-        % Alias beamer's example-environment as beamerexample
-        \let\beamerexample\example
-        \let\endbeamerexample\endexample
-        % Overwrite beamer's environments
-        \renewlist{examples}{enumerate}{3}
-    }
+    % If beamer is loaded, we let the compatibility style file handle
+    % the list definition.
+    \RequirePackage{example_sentences-beamer}
 \else
     \newlist{examples}{enumerate}{3}
 \fi
