@@ -80,7 +80,6 @@
 \fi
 %
 % DETECTING BEAMER
-
 %
 \newif\if@ExSen@beamer\@ExSen@beamerfalse
 \@ifclassloaded{beamer}{\@ExSen@beamertrue}{}
@@ -248,9 +247,6 @@
 % The definition of this command is borrowed from Alexander Holt's example.sty
 \newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.1 em}\ignorespaces}
 %
-% For the sticklers: Alias `examples` environment as `example`
-\let\example\examples
-\let\endexample\endexamples
 %
 % We expose the shortform commands early, in case [compat] aborts 
 % processing.
