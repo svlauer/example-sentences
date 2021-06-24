@@ -44,7 +44,7 @@ As I was dissatisfied with this state of affairs, I decided to write my own pack
 * [Syntactic sugar: Some enhancements for \item](#syntactic-sugar-some-enhancements-for-item)
     * [Diacritics with \item&lt;&gt;](#diacritics-with-item)
     * [Assigning labels with \item()](#assigning-labels-with-item)
-ef{...}, \ex{...}, and \exref{...}](#referencing-examples-in-the-text-ref-ex-and-exref)
+* [Referencing examples: `\ref{...}`, `\ex{...}`, and ``\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
 * [Typesetting dialogues withegin{conversation} ... \end{conversation}](#typesetting-dialogues-with-beginconversation--endconversation)
 * [Glosses](#glosses)
 * [Customization](#customization)
@@ -193,11 +193,9 @@ it would have to be used in running text with explicit parentheses:
 The sentence in (\ref{harlem}) is curious in that ...
 ```
 This is by design, because it is sometimes necessary to access the 
-example identifier itself. An example is if one wants to reference a 
-range of sub-examples, as in:
-```latex
-(\ref{imperatives}a-f) show the varied uses of imperatives.
-```
+example identifier itself, for example if one uses fancy packages for references
+such as `cleverref`.
+
 However, the package provides two handy shortcuts for example references. 
 Instead of writing `(\ref{harlem})`, you can simply write either:
 ```latex
