@@ -1,4 +1,4 @@
-# The `example_sentences.sty` package for typesetting linguistic examples
+# The `example-sentences` package for typesetting linguistic examples
 
 
 Linguists (and scholars in related fields) use example sentences in 
@@ -59,14 +59,14 @@ As I was dissatisfied with this state of affairs, I decided to write my own pack
 
 ## Installation
 
-As usual, simply place `example_sentences.sty` some place where TeX can 
-find it (the directory where your tex files live will work if all else 
+As usual, simply place the style files some place where TeX can 
+find them (the directory where your tex files live will work if all else 
 fails).
 
 Then you can load it in the usual way, by placing the following in the 
 preamble of your document:
 ```latex
-\usepackage{example_sentences}
+\usepackage{example-sentences}
 ```
 
 There are a number of [package options](#package-options), described 
@@ -75,7 +75,7 @@ below.
 ## Basic Usage: Zero learning curve
 
 If you know how to use the `enumerate` environment LaTeX provides, you 
-already know how to use `example_sentences`:
+already know how to use `example-sentences`:
 
 ```latex
 \begin{examples}
@@ -117,7 +117,7 @@ the original example number):
 ```
 
 In fact, this is almost all you need to know in order to produce 
-everyting that `example_sentences` can produce. The only additional thing
+everyting that `example-sentences` can produce. The only additional thing
 to know is how to typeset diacritic marks indicating acceptability and 
 such. You can do this explicitly by using the `\diacritic{}` command:
 ```latex
@@ -213,7 +213,7 @@ like this:
 
 ![Example of a conversation](http://www.sven-lauer.net/files/examples/example-conversation.png)
 
-If you load `example_sentences` with the `conversations` option, a new 
+If you load `example-sentences` with the `conversations` option, a new 
 environment  `conversations` becomes available, and the above can be 
 typeset as:
 ```latex
@@ -237,7 +237,7 @@ Configuration options are described in
 
 Currently, the package does not provide its own support for aligned 
 glosses. However, you can use `cgloss4e.sty` from 
-[gb4e](https://www.ctan.org/tex-archive/macros/latex/contrib/gb4e) together with `example_sentences`.
+[gb4e](https://www.ctan.org/tex-archive/macros/latex/contrib/gb4e) together with `example-sentences`.
 Then you can use the `\gll` and `\glll` macros as usual:
 ```latex
 \begin{examples}
@@ -279,7 +279,7 @@ for how example numbers should be formatted, and so forth:
 ```latex
 \setlist[examples,1]{leftmargin=2.5\parindent}
 ```
-To make it easier to overwrite single settings `example_sentences` adds 
+To make it easier to overwrite single settings `example-sentences` adds 
 configuration options that hold the default values. So instead, write:
 ```latex
 \setlist[examples,1]{ex1defaults,leftmargin=2.5\parindent}
@@ -310,7 +310,7 @@ modify this command (`beamer` comes to mind), there could be conflicts
 and other problems.
 
 For this reason, the loading the package with the option `normalitem`  
-(i.e., `\usepackage[normalitem]{example_sentences}`) tells the package 
+(i.e., `\usepackage[normalitem]{example-sentences}`) tells the package 
 to not touch the `\item` command. In this case, the command `\exitem` 
 can be used in place of `\item`, which has all of the advanced behavior
 of `\item` described above.
@@ -324,10 +324,10 @@ for the convenience commands `\exref` and `\ex` to produce reference to
 examples in the running text. You can turn them off by loading the 
 package as:
 ```latex
-\usepackage[noexref,noex]{example_sentences}
+\usepackage[noexref,noex]{example-sentences}
 ```
 Indeed, if you are using another reference package, it is recommended 
-that you use this way of loading `example_sentences`, to avoid 
+that you use this way of loading `example-sentences`, to avoid 
 cluttering the LaTex namespace.
 
 #### Turning off all enhancements: `noexitem` and `compat`
@@ -338,7 +338,7 @@ incompatibilities, you can turn off its functionality with the option
 
 This means the invocation
 ```latex
-\usepackage[normalitem,noexref,noex,noexitem]{example_sentences}
+\usepackage[normalitem,noexref,noex,noexitem]{example-sentences}
 ```
 would leave you with an `examples`-environment that behaves in all ways
 like the standard `enumerate`-environment (besides being customizable 
@@ -346,20 +346,20 @@ via `enumitem`'s options). If you desire this, there is a shortcut,
 which also prevents some internal processing that might lead to 
 incompatibilities:
 ```latex
-\usepackage[compat]{example_sentences}
+\usepackage[compat]{example-sentences}
 ```
 Note that `compat` implies `normalitem,noexref,noex,noexitem`.
 
 
 ### The `enumitemize` option
 
-Standardly, `example_sentences` loads the `enumitem` package with the 
+Standardly, `example-sentences` loads the `enumitem` package with the 
 `loadonly` option, which ensures that the standard LaTeX lists 
 (`enumerate`, `itemize` and `description`) are not enhanced by 
 `enumitem`.
 
 If you want to change this, pass the `enumitemize` option to 
-`example_sentences`.
+`example-sentences`.
 
 ### Other options
 
@@ -369,7 +369,7 @@ All options besides the one described above will be passed through to
 ## Dependencies
 
 Unless you (La)TeX installation is truly ancient, you should be able to
-use `example_sentences` without further ado. For the record, here is a
+use `example-sentences` without further ado. For the record, here is a
 list of the required packages:
 
 - [enumitem](https://www.ctan.org/pkg/enumitem) is the only required 
@@ -384,15 +384,15 @@ list of the required packages:
 
 `beamer` is a powerful package for typesetting slide-style 
 presentations. As is the case with many packages, a few things have to 
-be kept in mind when using `example_sentences` with `beamer`.
+be kept in mind when using `example-sentences` with `beamer`.
 
 ### `beamer`'s `examples`-environment
 
 By default, `beamer` defines an environment called `examples` and, 
 which typeset their contents in a `block` with the heading 
-"Examples". `example_sentences` **overwrites** this environment.
+"Examples". `example-sentences` **overwrites** this environment.
 
-To use the beamer-style `examples`-environment when `example_sentences` 
+To use the beamer-style `examples`-environment when `example-sentences` 
 is loaded,  you can use the alias `beamerexamples`:
 
 ```latex
@@ -408,10 +408,10 @@ use  of various beamer commands in documents that are typeset with other
 document classes, like `article`. This makes it easier to share code 
 between beamer slidesand an article or handout.
 
-To make sure that `example_sentences` plays nicely with 
+To make sure that `example-sentences` plays nicely with 
 `beamerarticle.sty`, you have two options:
 
-1. (recommended) Load `beamerarticle.sty` **before** `example_sentences.sty`. Then everything will 
+1. (recommended) Load `beamerarticle.sty` **before** `example-sentences.sty`. Then everything will 
     work as usual.
 2. Load `beamerarticle.sty` with the `notheorems` option, like so: 
    `\usepackage[notheorems]{beamerarticle}`.
@@ -462,7 +462,7 @@ description:
 ```
 ### Diacritics with `cgloss4e`
 
-As of this writing, `example_sentences` does not correctly typeset 
+As of this writing, `example-sentences` does not correctly typeset 
 diacritics when used together with `cgloss4e.sty`. The best
 workaround is to use
 use [Alexis Dimitriadis's `cgloss.sty`](http://www.let.uu.nl/~Alexis.Dimitriadis/personal/latex/cgloss.sty) 
@@ -487,7 +487,7 @@ It is custom to number examples in footnotes differently from the main
 text: Level one examples have lowercase roman numerals as labels, with 
 counting starting anew for each footnote.
 
-This is difficult to achieve in the general case. `example_sentences` 
+This is difficult to achieve in the general case. `example-sentences` 
 patches the standard LaTeX footnote commands (i.e., `\footnote` and 
 `footnotetext`), for all other methods of typesetting notes, you will 
 have to ensure yourself that the command `\footnotizeexamples` is called

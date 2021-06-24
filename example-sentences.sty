@@ -1,12 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 %
-\ProvidesPackage{example_sentences}%
-  [2017/08/27 Linguistic example sentences v.0.6.0]
+\ProvidesPackage{example-sentences}%
+  [2017/08/27 Linguistic example sentences v.0.8.0]
 %
 % OPTION PROCESSING
 %
 % Package Option: normalitem
-% Use \usepackage[normalitem]{example_sentences} to leave the original \item
+% Use \usepackage[normalitem]{example-sentences} to leave the original \item
 % command unchanged. You can then use \exitem instead for advanced behavior
 % that item otherwise gets, or the short version \ex (see below).
 \newif\if@ExSen@changeitem\@ExSen@changeitemtrue
@@ -33,7 +33,7 @@
 \DeclareOption{compat}{\@ExSen@compattrue}
 %
 % Package Option: enumitemize
-% Standardly, example_sentences does not apply enumitem's enhancements to 
+% Standardly, example-sentences does not apply enumitem's enhancements to 
 % the standard lists. This option changes that.
 \newif\if@ExSen@loadonly\@ExSen@loadonlytrue
 \DeclareOption{enumitemize}{\@ExSen@loadonlyfalse}
@@ -44,7 +44,7 @@
 \newif\if@ExSen@conversations\@ExSen@conversationsfalse
 \DeclareOption{conversations}{\@ExSen@conversationstrue}
 % All remaining options are passed on to the enumitem package. Note that this
-% you can pass [loadonly] to example_sentences to ensure that the usual environments
+% you can pass [loadonly] to example-sentences to ensure that the usual environments
 % (itemize, enumerate and description) are not enhanced by enumitem (the
 % default).
 %
@@ -57,7 +57,7 @@
 \fi
 % LOADING DEPENDENCIES
 % 
-% example_sentences is actually just a thin wrapper around the enumitem package
+% example-sentences is actually just a thin wrapper around the enumitem package
 % (plus some convenience commands)
 \RequirePackage{enumitem}
 %
@@ -82,7 +82,7 @@
 \if@ExSen@beamer
     % If beamer is loaded, we let the compatibility style file handle
     % the list definition.
-    \RequirePackage{example_sentences-beamer}
+    \RequirePackage{example-sentences-beamer}
 \else
     \newlist{examples}{enumerate}{3}
 \fi

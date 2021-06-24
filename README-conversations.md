@@ -20,7 +20,7 @@ With the `conversations.sty` the above can be typeset as:
 \end{conversation}
 ```
 
-`conversations.sty` is a companion to `example_sentences.sty` (and distributed
+`conversations.sty` is a companion to `example-sentences.sty` (and distributed
 with it), but it can also be used on its own, or in conjunction with other packages for typesetting examples, like `linguex.sty` or `gb4e.sty`.
 
 ## Installation 
@@ -33,9 +33,9 @@ of your document:
 ```latex
 \usepackage{conversations}
 ```
-If you are using the package together with `example_sentences`, you can also use:
+If you are using the package together with `example-sentences`, you can also use:
 ```latex
-\usepackage[conversations]{example_sentences}
+\usepackage[conversations]{example-sentences}
 ```
 In this case, `conversations.sty` will be loaded automatically, and the enhancements of the `\item`-command (e.g., using `<*>` to typeset diacritics)
 will be available for the `conversations` environment as well.
