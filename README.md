@@ -293,37 +293,6 @@ For details about the many configuration options, see
 
 ## Package Options
 
-### Short form commands with `shortform`
-
-If you cannot live without typing `\ex` in example environments, you can
-load the package as `\usepackage[shortform]{example_sentences}`. This 
-enables the short names `exe` (for the environment) and `\ex` (for the 
-`\item` command). So the initial example can then be rewritten as:
-
-```latex
-\begin{exe}
-  \ex \begin{exe}
-    \ex An example with sub-examples.
-    \ex \begin{exe}
-        \ex And sub-sub examples, like this one.
-        \ex And a second one.
-    \end{exe}
-  \end{exe}
-\end{exe}
-```
-`\ex` supports all the niceties of the `\item` command (provided 
-`xparse` is available), so all of `\ex<*>`, `\ex(label)<\#>`,  and 
-`\ex[(2)]<*>` are valid.
-
-For obvious reasons, the reference convenience command `\ex` will not be 
-work within example environments in `shortform` mode (it continues
-to work outside of the environment). You can use its alias `\exref` 
-instead.
-
-The commands introduced by `shortform` only are synonyms for the longer 
-commands, which remain in place. So long and short form commands can be
-mixed freely.
-
 ### Compatibility options: Turning of convenience commands
 
 One of the aims of this package is to be compatible with as many LaTeX 

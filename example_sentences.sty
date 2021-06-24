@@ -27,24 +27,10 @@
 \newif\if@ExSen@define@exitem\@ExSen@define@exitemtrue
 \DeclareOption{noexitem}{\@ExSen@define@exitemfalse}
 %
-%
 % Package Option: compat
 % Implies all of the above, and also prevents processing at an earlier stage
 \newif\if@ExSen@compat\@ExSen@compatfalse
 \DeclareOption{compat}{\@ExSen@compattrue}
-%
-% Package Option: shortform
-% Use \usepackage[shortform]{example_sentences} defines short names for the
-% environment "exe" and the item command \ex for \(ex)item.  So the following
-% is valid:
-%    \begin{exe}
-%       \ex(weird)<?> This example is weird.
-%       \ex(not-weird) This is example is not as weird as \exref{weird}.
-%    \end{exe}
-% Short forms are simply additional synonyms, so they can be freely intermixed
-% with the long form commands.
-\newif\if@ExSen@shortform\@ExSen@shortformfalse
-\DeclareOption{shortform}{\@ExSen@shortformtrue}
 %
 % Package Option: enumitemize
 % Standardly, example_sentences does not apply enumitem's enhancements to 
@@ -247,16 +233,6 @@
 % The definition of this command is borrowed from Alexander Holt's example.sty
 \newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.1 em}\ignorespaces}
 %
-%
-% We expose the shortform commands early, in case [compat] aborts 
-% processing.
-\if@ExSen@shortform
-    % Alias the example environment as `exe`
-    \let\exe\examples
-    \let\endexe\endexamples
-     % Define \ex to be \item within example lists ...
-    \g@addto@macro\ExSen@beforelist{\let\ex\item}
-\fi
 % In compat mode, we abort here, before any of the convenience commands
 % are defined.
 \if@ExSen@compat
@@ -332,17 +308,9 @@
    % \g@addto@macro is known to the practitioners of the dark arts (TeX)
    % as an invocation that globally (\g) appends (@addto) something
    % to a macro.
-   % I'd like to avoid using such primitives here, but doing so would
-   % require adding a dependency (such as etoolbox.sty), which seems
-   % excessive.
    \g@addto@macro\ExSen@beforelist{%
         % This assignment will be LOCAL to the group, so there is no
         % need to undo it afterwards.
         \let\item\ExSen@exitem%
     }
-\fi
-\if@ExSen@shortform
-    % If we got to this point, we actually want \ex to \exitem, rather than
-    % \item ...
-    \g@addto@macro\ExSen@beforelist{\let\ex\ExSen@exitem}
 \fi
