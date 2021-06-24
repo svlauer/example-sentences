@@ -2,6 +2,8 @@
 
 ## Dev version
 
+- **2020-06-24:** Removed the `noexref` option to avoid clutter.
+- **2020-06-24:** Renamed the package to `example-sentences` (with a hypen).
 - **2020-06-24:** Removed the `shortform` option in prepration for a proper `gb4e` emulation.
 - **2020-06-24:** Removed the singular `example`-environment to avoid clutter.
 - **2020-06-23:** Fixed [Issue #1: Overlay problems](https://github.com/svlauer/example-sentences/issues/1)

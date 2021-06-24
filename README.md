@@ -315,21 +315,17 @@ to not touch the `\item` command. In this case, the command `\exitem`
 can be used in place of `\item`, which has all of the advanced behavior
 of `\item` described above.
 
-#### Turning off reference commands with the `noexref` and `noex` options
+#### Turning off the short `\ex` reference command with the `noex` option
 
 LaTeX offers various packages (such as 
 [cleverref](https://www.ctan.org/pkg/cleveref?lang=en)) that improve on 
 reference handling. If you use such a package, you likely have no use 
-for the convenience commands `\exref` and `\ex` to produce reference to
-examples in the running text. You can turn them off by loading the 
+for the convenience commands `\ex` to produce reference to
+examples in the running text. You can turn it off by loading the 
 package as:
 ```latex
-\usepackage[noexref,noex]{example-sentences}
+\usepackage[noex]{example-sentences}
 ```
-Indeed, if you are using another reference package, it is recommended 
-that you use this way of loading `example-sentences`, to avoid 
-cluttering the LaTex namespace.
-
 #### Turning off all enhancements: `noexitem` and `compat`
 
 If, for some reason, even the `\exitem` command creates 
@@ -338,7 +334,7 @@ incompatibilities, you can turn off its functionality with the option
 
 This means the invocation
 ```latex
-\usepackage[normalitem,noexref,noex,noexitem]{example-sentences}
+\usepackage[normalitem,noex,noexitem]{example-sentences}
 ```
 would leave you with an `examples`-environment that behaves in all ways
 like the standard `enumerate`-environment (besides being customizable 
@@ -348,7 +344,8 @@ incompatibilities:
 ```latex
 \usepackage[compat]{example-sentences}
 ```
-Note that `compat` implies `normalitem,noexref,noex,noexitem`.
+`compat` implies `normalitem,noex,noexitem`, and also prevents 
+`example-sentences` from defining the `\exref`-command.
 
 
 ### The `enumitemize` option
