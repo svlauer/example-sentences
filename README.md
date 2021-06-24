@@ -39,23 +39,30 @@ The existing packages fall short of this ideal in several ways:
 As I was dissatisfied with this state of affairs, I decided to write my own package.
 
 ## Table of contents
-
-- [Installation](#installation)
-- [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
-- [Syntactic sugar: Some enhancements for `\item`](#syntactic-sugar-some-enhancements-for-item)
-- [Referencing examples in the text: `\ref{...}`, `\ex{...}`, and `\exref{...}`](#referencing-examples-in-the-text-ref-ex-and-exref)
-- [Typesetting dialogues with `\begin{conversation} ... \end{conversation}`](#typesetting-dialogues-with-beginconversation--endconversation)
-- [Glosses](#glosses)
-- [Customization](#customization)
-- [Package Options](#package-options)
-- [Dependencies](#dependencies)
-- [Compatibility with `beamer`](#compatibility-with-beamer)
-  + [`beamer`'s examples-environment](#beamers-examples-environment)
-  + [Using `beamerarticle.sty`](#using-beamerarticlesty)
-- [Known issues](#known-issues)
-  + [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
-  + [Diacritics with `cgloss4e`](#diacritics-with-cgloss4e)
-  + [Footnotes](#footnotes)
+* [Installation](#installation)
+* [Basic Usage: Zero learning curve](#basic-usage-zero-learning-curve)
+* [Syntactic sugar: Some enhancements for \item](#syntactic-sugar-some-enhancements-for-item)
+    * [Diacritics with \item&lt;&gt;](#diacritics-with-item)
+    * [Assigning labels with \item()](#assigning-labels-with-item)
+ef{...}, \ex{...}, and \exref{...}](#referencing-examples-in-the-text-ref-ex-and-exref)
+* [Typesetting dialogues withegin{conversation} ... \end{conversation}](#typesetting-dialogues-with-beginconversation--endconversation)
+* [Glosses](#glosses)
+* [Customization](#customization)
+* [Package Options](#package-options)
+    * [Compatibility options: Turning of convenience commands](#compatibility-options-turning-of-convenience-commands)
+        * [Leaving `\item` alone: the `normalitem` option](#leaving-item-alone-the-normalitem-option)
+        * [Turning off the short `\ex` reference command](#turning-off-the-short-ex-reference-command-with-the-noex-option)
+        * [For the ascets: The `compat` option](#for-the-ascets-the-compat-option)
+    * [The enumitemize option](#the-enumitemize-option)
+    * [Other options](#other-options)
+* [Dependencies](#dependencies)
+* [Compatibility with beamer](#compatibility-with-beamer)
+    * [beamer's examples-environment](#beamers-examples-environment)
+    * [Using beamerarticle.sty](#using-beamerarticlesty)
+* [Known issues](#known-issues)
+    * [Beginning an example with [...] or (...)](#beginning-an-example-with--or-)
+    * [Diacritics with cgloss4e](#diacritics-with-cgloss4e)
+    * [Footnotes](#footnotes)
 
 ## Installation
 
@@ -317,36 +324,22 @@ of `\item` described above.
 
 #### Turning off the short `\ex` reference command with the `noex` option
 
-LaTeX offers various packages (such as 
-[cleverref](https://www.ctan.org/pkg/cleveref?lang=en)) that improve on 
-reference handling. If you use such a package, you likely have no use 
-for the convenience commands `\ex` to produce reference to
-examples in the running text. You can turn it off by loading the 
-package as:
+Since `\ex` is so short, it is not unlikely that other packages define a
+command with this name. In this case, you might want to prevent
+`example-sentences` from defining `\ex` as short way to create references
+to examples, and use the longer name `\exref` instead (which always works).
 ```latex
 \usepackage[noex]{example-sentences}
 ```
-#### Turning off all enhancements: `noexitem` and `compat`
+#### For the ascets: The `compat` option
 
-If, for some reason, even the `\exitem` command creates 
-incompatibilities, you can turn off its functionality with the option 
-`noexitem`.
+If you pass the `compat` option to `example-sentences`, it will define the
+new `examples`-environment, but do nothing else: No any enhancements to 
+`\item`, no reference commands besides the standard `\ref`, not even `\exitem`.
 
-This means the invocation
-```latex
-\usepackage[normalitem,noex,noexitem]{example-sentences}
-```
-would leave you with an `examples`-environment that behaves in all ways
-like the standard `enumerate`-environment (besides being customizable 
-via `enumitem`'s options). If you desire this, there is a shortcut, 
-which also prevents some internal processing that might lead to 
-incompatibilities:
-```latex
-\usepackage[compat]{example-sentences}
-```
-`compat` implies `normalitem,noex,noexitem`, and also prevents 
-`example-sentences` from defining the `\exref`-command.
-
+This is mainly intended for cases where there are unexpected incompatibilities
+with other packages, but it may be useful also in case you want to define your
+own convenience commands.
 
 ### The `enumitemize` option
 

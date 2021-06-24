@@ -16,14 +16,9 @@
 % Prevents the \ex command (for references) from being defined
 \newif\if@ExSen@define@ex\@ExSen@define@extrue
 \DeclareOption{noex}{\@ExSen@defineexfalse}
-%
-% Package Option: noexitem
-% Prevents the \exitem command from being defined.
-\newif\if@ExSen@define@exitem\@ExSen@define@exitemtrue
-\DeclareOption{noexitem}{\@ExSen@define@exitemfalse}
-%
 % Package Option: compat
-% Implies all of the above, and also prevents processing at an earlier stage
+% Makes it so that only the example lists are defined, all enhancements
+% for \item and references are prevented from happening.
 \newif\if@ExSen@compat\@ExSen@compatfalse
 \DeclareOption{compat}{\@ExSen@compattrue}
 %
@@ -228,23 +223,21 @@
 % The definition of this command is borrowed from Alexander Holt's example.sty
 \newcommand{\diacritic}[1]{\leavevmode \llap{#1\kern 0.1 em}\ignorespaces}
 %
-% In compat mode, we abort here, before any of the convenience commands
-% are defined.
+% CONVENIENCE COMMAND DEFINITIONS
+%
+% In compat mode, we abort here: No convenience commands for you!
+%
 \if@ExSen@compat
     \endinput
 \fi
 %
-% CONVENIENCE COMAND DEFINITIONS
-% We first define internal versions of all commands (prefixed with ExSen@),
-% and expose them later, based on the package options. In the inline comments, 
-% we refer to the exposed command names.
-%
 % \exref command (standardly aliased as \ex), for convenient reference to 
 % examples.
-\newcommand{\ExSen@exref}[2][]{(\ref{#2}#1)}
+\newcommand{\exref}[2][]{(\ref{#2}#1)}
 %
 %
-% A flexible item command for examples. Can be used in the following ways
+% A flexible item command for examples, which standardly is aliased as `\item` within example lists.
+% Can be used in the following ways:
 %  - \exitem Standard use without argument.
 %  - \exitem[(4)] Optional argument in square brackets supplies a manual number (or other item).
 %  - \exitem(foo) Optional argument in round brackets is a convenient way to assign labels. Equivalent to \exitem\label{foo}
@@ -259,11 +252,11 @@
 }%
 \if@xparse
     \RequirePackage{xparse}
-    % We make a copy of latex \item command at the time that this package is
-    % loaded. This way, nothing odd will happen in case a later package changes
-    % the behavior of \item
+    % Internally, we use a copy of the \item command, created at the time 
+    % that this package is loaded. This way, nothing odd will happen in 
+    % case a later package changes the behavior of \item.
     \let\ExSen@item\item
-    \NewDocumentCommand{\ExSen@exitem}{o d() d<>}{%
+    \NewDocumentCommand{\exitem}{o d() d<>}{%
         \IfValueTF{#1}{%
             \ExSen@item[#1]%
         }{%
@@ -280,25 +273,20 @@
     % If xparse is available, we also enable a version of 
     % \ex(ref) that takes its optional argument last, as 
     % this is often more inuitive
-    \let\ExSen@oldexref\ExSen@exref
-    \RenewDocumentCommand{\ExSen@exref}{o m o}{%
+    \let\ExSen@oldexref\exref
+    \RenewDocumentCommand{\exref}{o m o}{%
         \IfValueTF{#1}{\ExSen@oldexref[#1]{#2}}{%
           \IfValueTF{#3}{\ExSen@oldexref[#3]{#2}}{\ExSen@oldexref{#2}}%
         }%
     }
 \fi
-%
-% EXPOSING THE CONVENIENCE API COMMANDS
-%
-\if@ExSen@define@exitem
-    \let\exitem\ExSen@item
-\fi
-\if@ExSen@define@exref
-    \let\exref\ExSen@exref
-\fi
+% Unless prevented by the package options, we define the \ex command for
+% example references. It is simply a nice alias for \exref.
 \if@ExSen@define@ex
-    \let\ex\ExSen@exref
+    \let\ex\exref
 \fi
+% Unless prevented by the package options, we make it so that WITHIN EXAMPLE
+% LISTS, \item is a synonym for \exitem, with all its enhancements.
 \if@ExSen@changeitem
    % \g@addto@macro is known to the practitioners of the dark arts (TeX)
    % as an invocation that globally (\g) appends (@addto) something
@@ -306,6 +294,6 @@
    \g@addto@macro\ExSen@beforelist{%
         % This assignment will be LOCAL to the group, so there is no
         % need to undo it afterwards.
-        \let\item\ExSen@exitem%
+        \let\item\exitem%
     }
 \fi

@@ -19,19 +19,13 @@ for example the diacritic in (\ref{ungrammatical}) below.
                         \end{examples}
               \end{examples}
     \end{examples}
-Consise label assignment will not work, so you'll have to use \verb|\label|:
-\begin{examples}
-    \item\label{foo} This example will have the label \verb|foo|.
-    \item\label{bar}\diacritic{\#} This example will have the label \verb|bar|, and will be marked 
-                unacceptable.
-\end{examples}
 %
 And the reference convenience commands will be turned off, so we have to use: 
-(\ref{foo}) and (\ref{bar}). Or use a fancy reference package like \verb|cleverref.sty| (recommended).
+(\ref{ungrammatical}). Or use a fancy reference package like \verb|cleverref.sty| (recommended).
 
 For crossreferences, we have to write \verb|\item[(\ref{label})]| (which is not too bad).
 \begin{examples}
-    \item[(\ref{foo})] This example will have the label `foo'.
+    \item[(\ref{ungrammatical})] \diacritic{*} Ungrammatical are this sentence.
 \end{examples}
 %
 \textbf{Note:} All of the above are perfectly valid ways of doing things in normal mode,

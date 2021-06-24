@@ -2,6 +2,7 @@
 
 ## Dev version
 
+- **2020-06-24:** Removed the `noexitem` option, but strengthened `compat` option instead.
 - **2020-06-24:** Removed the `noexref` option to avoid clutter.
 - **2020-06-24:** Renamed the package to `example-sentences` (with a hypen).
 - **2020-06-24:** Removed the `shortform` option in prepration for a proper `gb4e` emulation.
